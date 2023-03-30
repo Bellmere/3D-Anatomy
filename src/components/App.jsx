@@ -1,10 +1,11 @@
 import { Container } from "./container/container";
+import { RegisterForm } from "./registerForm/registerForm";
 
 export const App = () => {
   return (
     <div >
       <Container>
-        <h2>3D Anatomy</h2>
+        <RegisterForm />
       </Container>
     </div>
   );
