@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/3D-Anatomy/static/css/main.7acaea2f.css",
+    "main.js": "/3D-Anatomy/static/js/main.07d3183d.js",
+    "index.html": "/3D-Anatomy/index.html",
+    "main.7acaea2f.css.map": "/3D-Anatomy/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/3D-Anatomy/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
