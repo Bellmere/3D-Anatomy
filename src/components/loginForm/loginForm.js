@@ -1,18 +1,14 @@
-import { useDispatch } from 'react-redux';
 import { useState, useRef } from 'react';
 import { nanoid } from 'nanoid';
-import './registerForm.css';
+import './loginForm';
 
-const nameInputId = nanoid();
 const emailInputId = nanoid();
 const passwordInputId = nanoid();
 
-export const RegisterForm = () => {
-  const [nameActive, setNameActive] = useState(false);
+export const LoginForm = () => {
   const [emailActive, setEmailActive] = useState(false);
   const [passwordActive, setPasswordActive] = useState(false);
 
-  const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
@@ -32,28 +28,8 @@ export const RegisterForm = () => {
   return (
     <div className="auth--wrapper">
       <div className="auth_form--wrap">
-        <h2 className="auth__form__title">Register</h2>
+        <h2 className="auth__form__title">Sing In</h2>
         <form className="auth__form" autoComplete="off">
-          <div className="auth__item">
-            <label
-              htmlFor={nameInputId}
-              className={`auth__label ${nameActive ? 'auth__active' : ''}`}
-              onFocus={e => handleFocus(e, setNameActive)}
-              onBlur={() => handleBlur(setNameActive)}
-            >
-              Full name
-              <span className="auth_require">*</span>
-            </label>
-            <input
-              ref={nameInputRef}
-              id={nameInputId}
-              className="auth__input"
-              type="text"
-              name="name"
-              onFocus={e => handleFocus(e, setNameActive)}
-              onBlur={() => handleBlur(setNameActive)}
-            />
-          </div>
           <div className="auth__item">
             <label
               ref={emailInputRef}
@@ -96,7 +72,7 @@ export const RegisterForm = () => {
             />
           </div>
           <button className="auth__button" type="submit">
-            Register
+            Sing In
           </button>
         </form>
       </div>
