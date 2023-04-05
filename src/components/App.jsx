@@ -13,8 +13,6 @@ const RegisterPage = lazy(() => import('../pages/Register'));
 
 export const App = () => {
   return (
-    // <LoginForm/>
-    // <RegisterForm/>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
