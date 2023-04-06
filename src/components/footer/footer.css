@@ -1,0 +1,10 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 30px 0;
+    background: #222;
+}
+.footer__logo {
+    color: #fff;
+}

@@ -4,10 +4,11 @@ import './navigation.css';
 
 export const Navigation = () => {
   return (
-    <nav>
+    <nav className='main__nav'>
       <NavLink className="nav__link" to="/">
-        3D Anatomy
+        Home
       </NavLink>
+      <NavLink className="nav__link" to="*">About Us</NavLink>
     </nav>
   );
 };

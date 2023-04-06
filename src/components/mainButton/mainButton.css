@@ -12,6 +12,7 @@
     text-transform: uppercase;
     text-align: center;
     outline: 0;
+    border: none;
     color: #fff;
     background-color: #3f51b5;
     cursor: pointer;
