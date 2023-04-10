@@ -7,9 +7,6 @@ export const HOME = {
   label: 'Home',
 
   handlePermission : isAuth,
-  getDynamicParams(id) {
-    return this.path + id;
-  },
 };
 
 export const SINGUP = {

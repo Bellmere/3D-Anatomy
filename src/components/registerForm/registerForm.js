@@ -6,6 +6,8 @@ import { MainButton } from 'components/mainButton/mainButton';
 import { register } from 'redux/auth/operations';
 
 import './registerForm.css';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from 'api/firebase/firebase';
 
 const nameInputId = nanoid();
 const emailInputId = nanoid();
@@ -21,16 +23,26 @@ export const RegisterForm = () => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        form.elements.email.value,
+        form.elements.password.value
+      );
+      dispatch(
+        register({
+          name: form.elements.name.value,
+          email: userCredentials.user.email,
+          password: form.elements.password.value,
+          token: userCredentials.user.refreshToken,
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleFocus = (e, setActive) => {
@@ -39,7 +51,6 @@ export const RegisterForm = () => {
 
   const handleBlur = (e, setActive) => {
     const input = e.currentTarget;
-    console.log(input.value);
     setActive(false);
     if (input.value) {
       setActive(true);

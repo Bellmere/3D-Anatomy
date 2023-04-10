@@ -4,7 +4,7 @@ import { logIn, logOut, refreshUser, register } from './operations';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: { name: null, email: null, roles: ['admin'], token: null },
+    user: { name: null, email: null, roles: [], token: null },
     isLoggedIn: false,
     isRefreshing: false,
   },
