@@ -1,3 +1,3 @@
-import { HOME } from './routes';
+import { HOME, TEST } from './routes';
 
-export default [HOME];
+export default [HOME, TEST];

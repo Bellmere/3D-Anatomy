@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import { Link } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import { toast } from 'react-toastify';
 
 import { MainButton } from 'components/mainButton/mainButton';
 
@@ -21,11 +22,19 @@ export const LoginForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.currentTarget;
+    const { email, password } = e.target.elements;
+    const errors = validateForm({
+      email: email.value,
+      password: password.value,
+    });
+    if (Object.keys(errors).length > 0) {
+      const errorMessages = Object.values(errors).join('\n');
+      return toast.error(errorMessages);
+    }
     dispatch(
       logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
+        email: email.value,
+        password: password.value,
       })
     );
   };
@@ -40,6 +49,21 @@ export const LoginForm = () => {
     if (input.value) {
       setActive(true);
     }
+  };
+
+  const validateForm = ({ email, password }) => {
+    const errors = {};
+    if (!email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = 'Email is invalid';
+    }
+    if (!password) {
+      errors.password = 'Password is required';
+    } else if (password.length < 6) {
+      errors.password = 'Password must be at least 6 characters long';
+    }
+    return errors;
   };
 
   return (

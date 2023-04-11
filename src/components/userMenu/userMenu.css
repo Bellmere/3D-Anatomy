@@ -1,6 +1,7 @@
 .logout--wrapper {
     display: flex;
     align-items: center;
+    margin-left: 32px;
 }
 .logout__username {
     margin: 0;

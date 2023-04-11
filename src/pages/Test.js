@@ -1,9 +1,11 @@
+import { Container } from 'components/container/container';
+
 export default function Test() {
-    return (
-      <div>
-        <h2>
-         Private Page
-        </h2>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Container>
+        <h2>Private Page</h2>
+      </Container>
+    </div>
+  );
+}

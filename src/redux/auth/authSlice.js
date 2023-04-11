@@ -15,22 +15,27 @@ const authSlice = createSlice({
         // handle register pending state
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = {
+          name: action.payload.user.name,
+          email: action.payload.user.email,
+          token: action.payload.token,
+        };
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action) => {
         // handle register rejected state
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = {
+          email: action.payload.user.email,
+          token: action.payload.token,
+        };
         state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, (state, action) => {
-        state.user = { name: null, email: null };
-        state.token = null;
+        state.user = { name: null, email: null, token: null };
         state.isLoggedIn = false;
+        localStorage.removeItem('token');
       })
       .addCase(refreshUser.pending, (state, action) => {
         state.isRefreshing = true;

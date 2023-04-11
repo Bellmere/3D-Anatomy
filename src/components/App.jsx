@@ -6,7 +6,6 @@ import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { Loader } from './loader/loader';
-import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import ROUTES from 'constans/routes';
 
@@ -33,19 +32,31 @@ export const App = () => {
         <Route
           path={ROUTES.SINGUP.path}
           element={
-            <PrivateRoute component={<RegisterPage />} redirectTo="/test" guard={ROUTES.SINGUP} />
+            <PrivateRoute
+              component={<RegisterPage />}
+              redirectTo="/test"
+              guard={ROUTES.SINGUP}
+            />
           }
         />
         <Route
           path={ROUTES.SINGIN.path}
           element={
-            <PrivateRoute component={<SingInPage />} redirectTo="/test" guard={ROUTES.SINGIN} />
+            <PrivateRoute
+              component={<SingInPage />}
+              redirectTo="/test"
+              guard={ROUTES.SINGIN}
+            />
           }
         />
         <Route
           path={ROUTES.TEST.path}
           element={
-            <PrivateRoute component={<TestPage />} redirectTo="/singin" guard={ROUTES.TEST} />
+            <PrivateRoute
+              component={<TestPage />}
+              redirectTo="/singin"
+              guard={ROUTES.TEST}
+            />
           }
         />
         <Route path="*" element={<NotFoundPage />} />

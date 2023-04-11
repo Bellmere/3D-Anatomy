@@ -1,48 +1,50 @@
 import { useDispatch } from 'react-redux';
 import { useState, useRef } from 'react';
 import { nanoid } from 'nanoid';
+import { toast } from 'react-toastify';
 
 import { MainButton } from 'components/mainButton/mainButton';
 import { register } from 'redux/auth/operations';
 
 import './registerForm.css';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'api/firebase/firebase';
 
 const nameInputId = nanoid();
 const emailInputId = nanoid();
 const passwordInputId = nanoid();
+const passwordConfirmInputId = nanoid();
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const [nameActive, setNameActive] = useState(false);
   const [emailActive, setEmailActive] = useState(false);
   const [passwordActive, setPasswordActive] = useState(false);
+  const [passwordConfirmActive, setPasswordConfirmActive] = useState(false);
 
   const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+  const passwordConfirmInputRef = useRef(null);
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const form = e.currentTarget;
-    try {
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        form.elements.email.value,
-        form.elements.password.value
-      );
-      dispatch(
-        register({
-          name: form.elements.name.value,
-          email: userCredentials.user.email,
-          password: form.elements.password.value,
-          token: userCredentials.user.refreshToken,
-        })
-      );
-    } catch (error) {
-      console.error(error);
+    const { name, email, password, password_confirm } = e.target.elements;
+    const errors = validateForm({
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      password_confirm: password_confirm.value,
+    });
+    if (Object.keys(errors).length > 0) {
+      const errorMessages = Object.values(errors).join('\n');
+      return toast.error(errorMessages);
     }
+    dispatch(
+      register({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      })
+    );
   };
 
   const handleFocus = (e, setActive) => {
@@ -55,6 +57,29 @@ export const RegisterForm = () => {
     if (input.value) {
       setActive(true);
     }
+  };
+
+  const validateForm = ({ name, email, password, password_confirm }) => {
+    const errors = {};
+    if (!name) {
+      errors.name = 'Name is required';
+    }
+    if (!email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = 'Email is invalid';
+    }
+    if (!password) {
+      errors.password = 'Password is required';
+    } else if (password.length < 6) {
+      errors.password = 'Password must be at least 6 characters long';
+    }
+    if (!password_confirm) {
+      errors.password_confirm = 'Password confirmation is required';
+    } else if (password_confirm !== password) {
+      errors.password_confirm = 'Passwords do not match';
+    }
+    return errors;
   };
 
   return (
@@ -121,6 +146,28 @@ export const RegisterForm = () => {
               name="password"
               onFocus={e => handleFocus(e, setPasswordActive)}
               onBlur={e => handleBlur(e, setPasswordActive)}
+            />
+          </div>
+          <div className="auth__item">
+            <label
+              htmlFor={passwordConfirmInputId}
+              className={`auth__label ${
+                passwordConfirmActive ? 'auth__active' : ''
+              }`}
+              onFocus={e => handleFocus(e, setPasswordConfirmActive)}
+              onBlur={e => handleBlur(e, setPasswordConfirmActive)}
+            >
+              Confirm Password
+              <span className="auth_require">*</span>
+            </label>
+            <input
+              ref={passwordConfirmInputRef}
+              id={passwordConfirmInputId}
+              className="auth__input"
+              type="password"
+              name="password_confirm"
+              onFocus={e => handleFocus(e, setPasswordConfirmActive)}
+              onBlur={e => handleBlur(e, setPasswordConfirmActive)}
             />
           </div>
           <MainButton>Register</MainButton>

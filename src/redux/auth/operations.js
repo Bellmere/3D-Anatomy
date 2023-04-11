@@ -9,7 +9,7 @@ import {
 import { auth } from 'api/firebase/firebase';
 
 const notifyFailed = () => toast('Registration Failed');
-const notifyNoSuchUser = () => toast('No Such User');
+const notifyNoSuchUser = () => toast('Invalid email or password');
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -55,6 +55,8 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await signOut(auth);
+    localStorage.clear();
+    return { token: null };
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -70,7 +72,7 @@ export const refreshUser = createAsyncThunk(
       }
 
       const user = await new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, user => {
           if (user) {
             resolve(user);
           } else {
@@ -86,4 +88,3 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-

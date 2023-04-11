@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-// import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDumgOcN6Vv-w_jd-ZUfvK3DBgHGeaDrdQ',
@@ -14,8 +13,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
-
-
-
-// databaseURL:
-// 'https://d-anatomy-test-default-rtdb.europe-west1.firebasedatabase.app/',

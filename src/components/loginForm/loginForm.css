@@ -69,7 +69,7 @@
 }
 .singin__link--wrap {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .singIn__link {
   display: inline-block;
