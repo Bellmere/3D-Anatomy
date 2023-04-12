@@ -4,16 +4,16 @@ import { Provider } from 'react-redux';
 import { store, persistor } from 'redux/store';
 import { App } from 'components/App';
 import { BrowserRouter } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
-
+import {  StoreContext  } from './context';
+import rootStore from './mobx/rootStore';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+    <StoreContext.Provider value={rootStore}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </StoreContext.Provider>
 );

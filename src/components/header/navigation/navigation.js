@@ -1,11 +1,14 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from 'hooks';
+
+import { observer } from 'mobx-react-lite';
+import { StoreContext, useContext} from '../../../context';
 import listHeaderMenu from 'constans/routes/listHeaderMenu';
+
 import './navigation.css';
 
-export const Navigation = () => {
-  const { user } = useAuth();
-  const menuList = listHeaderMenu.filter(route => route.handlePermission(user));
+export const Navigation = observer(() => {
+  const { authUser } = useContext(StoreContext);
+  const menuList = listHeaderMenu.filter(route => route.handlePermission(authUser));
   return (
     <nav className="main__nav">
       {menuList.map(item => (
@@ -15,4 +18,4 @@ export const Navigation = () => {
       ))}
     </nav>
   );
-};
+});

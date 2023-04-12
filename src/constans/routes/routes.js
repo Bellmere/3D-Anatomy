@@ -1,14 +1,8 @@
-const isAuth = user => {
-  if (!user) {
-    return false;
-  }
-  return user.token !== null;
-};
+const isAuth = user => user.isAuth;
 
 export const HOME = {
   path: '/',
   label: 'Home',
-
   handlePermission : () => true,
 };
 
@@ -22,13 +16,11 @@ export const SINGUP = {
 export const SINGIN = {
   path: 'singin',
   label: 'Singin',
-
   handlePermission : (user) => !isAuth(user),
 };
 
 export const TEST = {
   path: 'test',
   label: 'Test',
-
   handlePermission : isAuth,
 };

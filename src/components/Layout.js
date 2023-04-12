@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { AppBar } from './appBar/appBar';
-import { Container } from './container/container';
+import { AppBar } from './header/appBar/appBar';
+import { Container } from './styled/container/container';
 import { Footer } from './footer/footer';
 
 import 'react-toastify/dist/ReactToastify.css';

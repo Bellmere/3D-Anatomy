@@ -1,4 +1,4 @@
-import { Container } from 'components/container/container';
+import { Container } from 'components/styled/container/container';
 import { Logo } from 'components/logo/logo';
 import './footer.css';
 

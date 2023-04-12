@@ -1,50 +1,43 @@
-import { useDispatch } from 'react-redux';
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
+import { observer } from "mobx-react-lite"
 
-import { MainButton } from 'components/mainButton/mainButton';
-import { register } from 'redux/auth/operations';
+import { StoreContext, useContext } from '../../../context';
+import { MainButton } from 'components/buttons/main/mainButton';
 
-import './registerForm.css';
+import './loginForm.css';
+import ErrorCode from '../../../constans/error-code';
 
-const nameInputId = nanoid();
 const emailInputId = nanoid();
 const passwordInputId = nanoid();
-const passwordConfirmInputId = nanoid();
 
-export const RegisterForm = () => {
-  const dispatch = useDispatch();
-  const [nameActive, setNameActive] = useState(false);
+export const LoginForm = observer(() => {
+
+  const { authUser } = useContext(StoreContext);
   const [emailActive, setEmailActive] = useState(false);
   const [passwordActive, setPasswordActive] = useState(false);
-  const [passwordConfirmActive, setPasswordConfirmActive] = useState(false);
 
-  const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
-  const passwordConfirmInputRef = useRef(null);
-
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password, password_confirm } = e.target.elements;
+    const { email, password } = e.target.elements;
     const errors = validateForm({
-      name: name.value,
       email: email.value,
       password: password.value,
-      password_confirm: password_confirm.value,
     });
     if (Object.keys(errors).length > 0) {
       const errorMessages = Object.values(errors).join('\n');
       return toast.error(errorMessages);
     }
-    dispatch(
-      register({
-        name: name.value,
-        email: email.value,
-        password: password.value,
-      })
-    );
+    try {
+      const res = await authUser.logIn(email.value, password.value);
+      if(!res.success) throw new Error(res.errorCode)
+    } catch (error) {
+      toast.error(ErrorCode[error.message])
+    }
   };
 
   const handleFocus = (e, setActive) => {
@@ -59,11 +52,8 @@ export const RegisterForm = () => {
     }
   };
 
-  const validateForm = ({ name, email, password, password_confirm }) => {
+  const validateForm = ({ email, password }) => {
     const errors = {};
-    if (!name) {
-      errors.name = 'Name is required';
-    }
     if (!email) {
       errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -74,39 +64,14 @@ export const RegisterForm = () => {
     } else if (password.length < 6) {
       errors.password = 'Password must be at least 6 characters long';
     }
-    if (!password_confirm) {
-      errors.password_confirm = 'Password confirmation is required';
-    } else if (password_confirm !== password) {
-      errors.password_confirm = 'Passwords do not match';
-    }
     return errors;
   };
 
   return (
     <div className="auth--wrapper">
       <div className="auth_form--wrap">
-        <h2 className="auth__form__title">Register</h2>
+        <h2 className="auth__form__title">Sing In</h2>
         <form className="auth__form" onSubmit={handleSubmit} autoComplete="off">
-          <div className="auth__item">
-            <label
-              htmlFor={nameInputId}
-              className={`auth__label ${nameActive ? 'auth__active' : ''}`}
-              onFocus={e => handleFocus(e, setNameActive)}
-              onBlur={e => handleBlur(e, setNameActive)}
-            >
-              Full name
-              <span className="auth_require">*</span>
-            </label>
-            <input
-              ref={nameInputRef}
-              id={nameInputId}
-              className="auth__input"
-              type="text"
-              name="name"
-              onFocus={e => handleFocus(e, setNameActive)}
-              onBlur={e => handleBlur(e, setNameActive)}
-            />
-          </div>
           <div className="auth__item">
             <label
               ref={emailInputRef}
@@ -148,31 +113,14 @@ export const RegisterForm = () => {
               onBlur={e => handleBlur(e, setPasswordActive)}
             />
           </div>
-          <div className="auth__item">
-            <label
-              htmlFor={passwordConfirmInputId}
-              className={`auth__label ${
-                passwordConfirmActive ? 'auth__active' : ''
-              }`}
-              onFocus={e => handleFocus(e, setPasswordConfirmActive)}
-              onBlur={e => handleBlur(e, setPasswordConfirmActive)}
-            >
-              Confirm Password
-              <span className="auth_require">*</span>
-            </label>
-            <input
-              ref={passwordConfirmInputRef}
-              id={passwordConfirmInputId}
-              className="auth__input"
-              type="password"
-              name="password_confirm"
-              onFocus={e => handleFocus(e, setPasswordConfirmActive)}
-              onBlur={e => handleBlur(e, setPasswordConfirmActive)}
-            />
+          <MainButton>Sing In</MainButton>
+          <div className="singin__link--wrap">
+            <Link className="singIn__link" to="/singup">
+              Register
+            </Link>
           </div>
-          <MainButton>Register</MainButton>
         </form>
       </div>
     </div>
   );
-};
+});

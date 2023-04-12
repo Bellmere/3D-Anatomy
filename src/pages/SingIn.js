@@ -1,5 +1,5 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { LoginForm } from 'components/loginForm/loginForm';
+import { LoginForm } from 'components/forms/login/loginForm';
 
 export default function SingIn() {
   return (

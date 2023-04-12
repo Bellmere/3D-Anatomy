@@ -1,11 +1,13 @@
-import { useAuth } from 'hooks';
 import { Navigate } from 'react-router-dom';
+import { observer } from "mobx-react-lite"
 
-export const PrivateRoute = ({
+import { StoreContext, useContext } from '../context';
+
+export const PrivateRoute = observer(({
   component: Component,
   redirectTo = '/',
   guard,
 }) => {
-  const { user } = useAuth();
-  return guard.handlePermission(user) ? Component : <Navigate to={redirectTo} /> ;
-};
+  const { authUser } = useContext(StoreContext);
+  return guard.handlePermission(authUser) ? Component : <Navigate to={redirectTo} /> ;
+});

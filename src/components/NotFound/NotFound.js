@@ -1,4 +1,4 @@
-import { Container } from 'components/container/container';
+import { Container } from 'components/styled/container/container';
 import './NotFound.css';
 
 function NotFound() {
