@@ -12,6 +12,7 @@ import './registerForm.css';
 
 export const RegisterForm = observer(() => {
   const { authUser } = useContext(StoreContext);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const dataForm = Object.fromEntries(Array.from(new FormData(e.target)));

@@ -1,70 +1,33 @@
-import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
-import { observer } from "mobx-react-lite"
+import { observer } from 'mobx-react-lite';
 
 import { StoreContext, useContext } from '../../../context';
+import BaseInput from 'components/fields/baseInput';
 import { MainButton } from 'components/buttons/main/mainButton';
-
-import './loginForm.css';
+import { validationFormLogin } from '../../../helpers';
 import ErrorCode from '../../../constans/error-code';
 
-const emailInputId = nanoid();
-const passwordInputId = nanoid();
+import './loginForm.css';
 
 export const LoginForm = observer(() => {
-
   const { authUser } = useContext(StoreContext);
-  const [emailActive, setEmailActive] = useState(false);
-  const [passwordActive, setPasswordActive] = useState(false);
 
-  const emailInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const { email, password } = e.target.elements;
-    const errors = validateForm({
-      email: email.value,
-      password: password.value,
-    });
+    const dataForm = Object.fromEntries(Array.from(new FormData(e.target)));
+    console.log(dataForm);
+    const errors = validationFormLogin(dataForm);
     if (Object.keys(errors).length > 0) {
       const errorMessages = Object.values(errors).join('\n');
       return toast.error(errorMessages);
     }
     try {
-      const res = await authUser.logIn(email.value, password.value);
-      if(!res.success) throw new Error(res.errorCode)
+      const res = await authUser.logIn(dataForm);
+      if (!res.success) throw new Error(res.errorCode);
     } catch (error) {
-      toast.error(ErrorCode[error.message])
+      toast.error(ErrorCode[error.message]);
     }
-  };
-
-  const handleFocus = (e, setActive) => {
-    setActive(true);
-  };
-
-  const handleBlur = (e, setActive) => {
-    const input = e.currentTarget;
-    setActive(false);
-    if (input.value) {
-      setActive(true);
-    }
-  };
-
-  const validateForm = ({ email, password }) => {
-    const errors = {};
-    if (!email) {
-      errors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = 'Email is invalid';
-    }
-    if (!password) {
-      errors.password = 'Password is required';
-    } else if (password.length < 6) {
-      errors.password = 'Password must be at least 6 characters long';
-    }
-    return errors;
   };
 
   return (
@@ -73,44 +36,14 @@ export const LoginForm = observer(() => {
         <h2 className="auth__form__title">Sing In</h2>
         <form className="auth__form" onSubmit={handleSubmit} autoComplete="off">
           <div className="auth__item">
-            <label
-              ref={emailInputRef}
-              htmlFor={emailInputId}
-              className={`auth__label ${emailActive ? 'auth__active' : ''}`}
-              onFocus={e => handleFocus(e, setEmailActive)}
-              onBlur={e => handleBlur(e, setEmailActive)}
-            >
-              Email Address
-              <span className="auth_require">*</span>
-            </label>
-            <input
-              ref={emailInputRef}
-              id={emailInputId}
-              className="auth__input"
-              type="email"
-              name="email"
-              onFocus={e => handleFocus(e, setEmailActive)}
-              onBlur={e => handleBlur(e, setEmailActive)}
-            />
+            <BaseInput name="email" type="email" label="Email" isRequired />
           </div>
           <div className="auth__item">
-            <label
-              htmlFor={passwordInputId}
-              className={`auth__label ${passwordActive ? 'auth__active' : ''}`}
-              onFocus={e => handleFocus(e, setPasswordActive)}
-              onBlur={e => handleBlur(e, setPasswordActive)}
-            >
-              Password
-              <span className="auth_require">*</span>
-            </label>
-            <input
-              ref={passwordInputRef}
-              id={passwordInputId}
-              className="auth__input"
-              type="password"
+            <BaseInput
               name="password"
-              onFocus={e => handleFocus(e, setPasswordActive)}
-              onBlur={e => handleBlur(e, setPasswordActive)}
+              type="password"
+              label="Password"
+              isRequired
             />
           </div>
           <MainButton>Sing In</MainButton>
