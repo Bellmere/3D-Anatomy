@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import { observer } from 'mobx-react-lite';
 
 import { StoreContext, useContext } from '../../../context';
-import BaseInput from 'components/fields/baseInput';
-import { MainButton } from 'components/buttons/main/mainButton';
 import { validationFormLogin } from '../../../helpers';
+import { MainButton } from 'components/buttons/main/mainButton';
+import BaseInput from 'components/fields/baseInput';
 import ErrorCode from '../../../constans/error-code';
 
 import './loginForm.css';
@@ -16,14 +16,14 @@ export const LoginForm = observer(() => {
   const handleSubmit = async e => {
     e.preventDefault();
     const dataForm = Object.fromEntries(Array.from(new FormData(e.target)));
-    console.log(dataForm);
+    const { email, password } = dataForm;
     const errors = validationFormLogin(dataForm);
     if (Object.keys(errors).length > 0) {
       const errorMessages = Object.values(errors).join('\n');
       return toast.error(errorMessages);
     }
     try {
-      const res = await authUser.logIn(dataForm);
+      const res = await authUser.logIn(email.value, password.value);
       if (!res.success) throw new Error(res.errorCode);
     } catch (error) {
       toast.error(ErrorCode[error.message]);
