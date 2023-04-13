@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { AppBar } from './header/appBar/appBar';
-import { Container } from './styled/container/container';
 import { Footer } from './footer/footer';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +11,9 @@ export const Layout = () => {
     <>
       <AppBar />
       <Suspense fallback={null}>
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
       </Suspense>
       <Footer />
       <ToastContainer

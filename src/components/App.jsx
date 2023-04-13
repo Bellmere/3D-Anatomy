@@ -9,7 +9,7 @@ const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
 const SingInPage = lazy(() => import('../pages/SingIn'));
 const NotFoundPage = lazy(() => import('./NotFound/NotFound'));
-const TestPage = lazy(() => import('../pages/Test'));
+const AllNotesPage = lazy(() => import('../pages/AllNotes'));
 
 export const App = () => {
   return (
@@ -23,7 +23,7 @@ export const App = () => {
             element={
               <PrivateRoute
                 component={<RegisterPage />}
-                redirectTo="/test"
+                redirectTo="/notes"
                 guard={ROUTES.SINGUP}
               />
             }
@@ -33,18 +33,18 @@ export const App = () => {
             element={
               <PrivateRoute
                 component={<SingInPage />}
-                redirectTo="/test"
+                redirectTo="/notes"
                 guard={ROUTES.SINGIN}
               />
             }
           />
           <Route
-            path={ROUTES.TEST.path}
+            path={ROUTES.ALLNOTES.path}
             element={
               <PrivateRoute
-                component={<TestPage />}
+                component={<AllNotesPage />}
                 redirectTo="/singin"
-                guard={ROUTES.TEST}
+                guard={ROUTES.ALLNOTES}
               />
             }
           />

@@ -1,6 +1,7 @@
 @import-normalize; /* bring in normalize.css styles */
 
 body {
+  width: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -9,7 +10,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  flex-grow: 1;
+}
+
+header,
+main,
+footer {
+  flex-shrink: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }

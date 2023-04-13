@@ -19,8 +19,8 @@ export const SINGIN = {
   handlePermission : (user) => !isAuth(user),
 };
 
-export const TEST = {
-  path: 'test',
-  label: 'Test',
+export const ALLNOTES = {
+  path: 'notes',
+  label: 'All Notes',
   handlePermission : isAuth,
 };
