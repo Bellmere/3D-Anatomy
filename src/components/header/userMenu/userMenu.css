@@ -5,8 +5,8 @@
 }
 .logout__username {
     margin: 0;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 500;
     line-height: 1.2;
 }
 .logout__button {
