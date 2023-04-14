@@ -29,3 +29,10 @@
 .logout__button:hover {
     background-color: #303f9f;
 }
+
+@media(max-width: 480px) {
+    .logout--wrapper {
+        flex-direction: column-reverse;
+        gap: 5px;
+    }
+}

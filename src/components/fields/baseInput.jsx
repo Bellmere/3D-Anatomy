@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 
-const id = nanoid();
 export default function BaseInput({ name, label = '', type = 'text', isRequired }) {
+  const id = nanoid();
   const [active, setActive] = useState(false);
   const handleFocus = () => setActive(true);
   const handleBlur = ({ target }) => setActive(!!target.value.trim());

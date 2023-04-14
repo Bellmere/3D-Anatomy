@@ -1,4 +1,5 @@
 .filter--wrapper {
+    display: flex;
     position: relative;
     padding: 16px;
     margin-top: 12px;
