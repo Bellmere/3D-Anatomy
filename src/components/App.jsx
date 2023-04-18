@@ -5,6 +5,8 @@ import { Layout } from './Layout';
 import { Loader } from './loader/loader';
 import { PrivateRoute } from './PrivateRoute';
 import ROUTES from 'constans/routes';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
 const SingInPage = lazy(() => import('../pages/SingIn'));
@@ -14,6 +16,11 @@ const TestPage = lazy(() => import('../pages/Test'));
 export const App = () => {
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <script src="https://developer.biodigital.com/builds/api/2/human-api.min.js"></script>
+        </Helmet>
+      </HelmetProvider>
       <Loader />
       <Routes>
         <Route path={ROUTES.HOME.path} element={<Layout />}>
@@ -23,7 +30,7 @@ export const App = () => {
             element={
               <PrivateRoute
                 component={<RegisterPage />}
-                redirectTo="/test"
+                redirectTo='/test'
                 guard={ROUTES.SINGUP}
               />
             }
@@ -33,7 +40,7 @@ export const App = () => {
             element={
               <PrivateRoute
                 component={<SingInPage />}
-                redirectTo="/test"
+                redirectTo='/test'
                 guard={ROUTES.SINGIN}
               />
             }
@@ -43,12 +50,12 @@ export const App = () => {
             element={
               <PrivateRoute
                 component={<TestPage />}
-                redirectTo="/singin"
+                redirectTo='/singin'
                 guard={ROUTES.TEST}
               />
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
     </>

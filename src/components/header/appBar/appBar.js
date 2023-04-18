@@ -6,7 +6,6 @@ import { UserMenu } from 'components/header/userMenu/userMenu';
 import { Logo } from 'components/logo/logo';
 import { observer } from 'mobx-react-lite';
 import { StoreContext, useContext} from '../../../context';
-import listHeaderMenu from 'constans/routes/listHeaderMenu';
 
 import { ReactComponent as MobileMenuIcon } from '../../../icons/mobile-menu.svg';
 import { ReactComponent as MobileMenuIconCross } from '../../../icons/mobile-menu-cross.svg';
