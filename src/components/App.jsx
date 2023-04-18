@@ -5,6 +5,8 @@ import { Layout } from './Layout';
 import { Loader } from './loader/loader';
 import { PrivateRoute } from './PrivateRoute';
 import ROUTES from 'constans/routes';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
 const SingInPage = lazy(() => import('../pages/SingIn'));
@@ -14,6 +16,11 @@ const AllNotesPage = lazy(() => import('../pages/AllNotes'));
 export const App = () => {
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <script src="https://developer.biodigital.com/builds/api/2/human-api.min.js"></script>
+        </Helmet>
+      </HelmetProvider>
       <Loader />
       <Routes>
         <Route path={ROUTES.HOME.path} element={<Layout />}>

@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDumgOcN6Vv-w_jd-ZUfvK3DBgHGeaDrdQ',
-  authDomain: 'd-anatomy-test.firebaseapp.com',
-  projectId: 'd-anatomy-test',
-  storageBucket: 'd-anatomy-test.appspot.com',
-  messagingSenderId: '583358589832',
-  appId: '1:583358589832:web:8fcf0d9e05d8388fb6283d',
+  apiKey: "AIzaSyC9R23nmjdRMXZ6G3rYlCsodI91qkBTQqo",
+  authDomain: "app-antomy-test.firebaseapp.com",
+  projectId: "app-antomy-test",
+  storageBucket: "app-antomy-test.appspot.com",
+  messagingSenderId: "431353057514",
+  appId: "1:431353057514:web:2873a38aa99a00bd738793"
 };
 
 const app = initializeApp(firebaseConfig);

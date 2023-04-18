@@ -29,7 +29,7 @@ class AuthUser {
     yield signOut(auth);
   }
 
-  * createUserWithEmailAndPassword(email, password) {
+  * createUserWithEmailAndPassword({ email, password } ) {
     try {
       yield createUserWithEmailAndPassword(auth, email, password)
       return { success: true };
