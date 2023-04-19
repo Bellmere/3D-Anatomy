@@ -16,7 +16,6 @@ export default observer(function Notes() {
     notes.getLearns(id);
   }, [id, notes])
 
-  console.log(111);
  const handleChange = (text) => notes.setSearch(text);
   return (
     <section>

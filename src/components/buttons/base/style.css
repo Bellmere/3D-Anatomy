@@ -28,6 +28,8 @@
 
 .button-9:disabled {
   cursor: default;
+  opacity: 0.8;
+  pointer-events: none;
 }
 .button-9:hover {
   opacity: 0.9;

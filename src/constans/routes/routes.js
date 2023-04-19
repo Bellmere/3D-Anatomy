@@ -6,7 +6,7 @@ export const HOME = {
   getPath() {
     return this.path;
   },
-  handlePermission : () => true,
+  handlePermission : () => !isAuth,
 };
 
 export const SINGUP = {
@@ -43,6 +43,16 @@ export const ALLNOTES = {
 export const VIEWER = {
   path: 'viewer/:id',
   label: 'Viewer',
+  getPath() {
+    return this.path;
+  },
+  handlePermission : isAuth,
+};
+
+
+export const ADD_MODEL = {
+  path: 'add-model',
+  label: 'Model',
   getPath() {
     return this.path;
   },

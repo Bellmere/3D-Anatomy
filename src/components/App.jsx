@@ -9,6 +9,7 @@ import { StoreContext, useContext } from '../context';
 import ROUTES from 'constans/routes';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import SideBar from './sidebar';
+import Index from '../pages/AddModelPage';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
@@ -24,7 +25,7 @@ export const App = observer(() => {
     <>
       <HelmetProvider>
         <Helmet>
-          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" ></link>
+          <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>
           <script src='https://developer.biodigital.com/builds/api/2/human-api.min.js'></script>
         </Helmet>
       </HelmetProvider>
@@ -33,7 +34,17 @@ export const App = observer(() => {
       {authUser.isAuth === null ? null :
         <Routes>
           <Route path={ROUTES.HOME.path} element={<Layout />}>
-            <Route index element={<HomePage />} />
+            <Route
+              path={ROUTES.HOME.path}
+              index
+              element={
+                <PrivateRoute
+                  component={<HomePage />}
+                  redirectTo='/notes'
+                  guard={ROUTES.HOME}
+                />
+              }
+            />
             <Route
               path={ROUTES.SINGUP.path}
               element={
@@ -71,6 +82,16 @@ export const App = observer(() => {
                   component={<ViewerPage />}
                   redirectTo='/singin'
                   guard={ROUTES.VIEWER}
+                />
+              }
+            />
+            <Route
+              path={ROUTES.ADD_MODEL.path}
+              element={
+                <PrivateRoute
+                  component={<Index />}
+                  redirectTo={ROUTES.SINGIN.path}
+                  guard={ROUTES.ADD_MODEL}
                 />
               }
             />

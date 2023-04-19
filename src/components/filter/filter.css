@@ -1,7 +1,7 @@
 .filter--wrapper {
     display: flex;
     position: relative;
-    padding: 16px;
+    padding: 16px 16px 16px 0;
     margin-top: 12px;
 }
 .filter__label {

@@ -1,0 +1,9 @@
+.add-model-page__top-block {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0 ;
+}
+.add-model-page__top-block__input_url {
+  width: 400px;
+}
+

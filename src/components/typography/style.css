@@ -3,6 +3,9 @@
   height: 90%;
   overflow-y: scroll;
 }
+.typography-component p > br {
+  display: none;
+}
 
 .typography-component .action-item {
   cursor: pointer;

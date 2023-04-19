@@ -1,7 +1,9 @@
 import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { NavLink } from 'react-router-dom';
-import { ALLNOTES } from '../../constans/routes/routes';
+import { ALLNOTES, ADD_MODEL } from '../../constans/routes/routes';
 import { useLocation } from 'react-router-dom';
+import { useDetectClickOutside } from 'react-detect-click-outside';
+
 import './style.css';
 
 
@@ -10,10 +12,8 @@ import { useEffect } from 'react';
 
 export default function SideBar() {
   const { collapseSidebar } = useProSidebar();
-
   const location = useLocation();
   useEffect(() => {
-    console.log('location');
     collapseSidebar(true);
   }, [location.pathname, collapseSidebar]);
   const regions = CATEGORIES.REGION;
@@ -31,7 +31,9 @@ export default function SideBar() {
               </MenuItem>
             ))}
           </SubMenu>
-          <MenuItem component='div'>Create</MenuItem>
+          <MenuItem component='div'>
+            <NavLink to={ADD_MODEL.path}>Add New Model</NavLink>
+          </MenuItem>
         </Menu>
       </Sidebar>
     </div>

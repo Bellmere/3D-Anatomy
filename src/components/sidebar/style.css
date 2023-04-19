@@ -6,18 +6,19 @@
   background-color: #ffffff;
 }
 
-
 .sidebar .sub-menu span {
   width: 100%;
   height: 100%;
 }
 
-.sidebar .sub-menu a  {
+.sidebar .sub-menu a.active {
+  color: blue;
+}
+
+
+.sidebar .ps-menu-button a {
   display: flex;
   height: 100%;
   width: 100%;
   align-items: center;
-}
-.sidebar .sub-menu a.active {
-  color: blue;
 }

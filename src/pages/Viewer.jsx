@@ -9,6 +9,7 @@ import HeaderPageView from '../components/header-page/HeaderPageView';
 import Typography from '../components/typography';
 import IFrameHuman from '../components/biodigital/IFrameHuman';
 import GroupButtonPagination from '../components/buttons/group-button-pagination';
+import BaseButton from '../components/buttons/base';
 
 const styleNotesController = {
   width: 'auto',
@@ -21,6 +22,7 @@ const styleNotesController = {
 export default observer(function ViewerPage() {
   const [store] = useState(new Viewer());
   const [humanApi] = useState(new HumanApi());
+  const [showResetButton, setShowResetButton] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -33,13 +35,13 @@ export default observer(function ViewerPage() {
   }, [store.noteSelected, humanApi]);
 
   const init = () => {
+    setShowResetButton(true);
     humanApi.init();
     humanApi.updateCamera();
   };
 
   const reset = () => {
     humanApi.reset();
-    store.reset();
   };
 
   const nextNote = () => store.nextNote();
@@ -53,11 +55,12 @@ export default observer(function ViewerPage() {
         handlerPrev={() => humanApi.prevAction()}
         handlerNext={() => humanApi.nextAction()}
         handlerSelect={(index) => humanApi.setIndexActiveAction(index)}
-        handlerReset={reset}
       />
       {store.noteSelected?.scene ?
         <div className='container-iframe'>
-          <IFrameHuman scene={store.noteSelected.scene} init={init} />
+          <IFrameHuman scene={store.noteSelected.scene} init={init}>
+            { showResetButton ? <BaseButton handlerClick={reset}>Reset</BaseButton> : null }
+          </IFrameHuman>
           <div className='header-page-typography'>
             <div style={styleNotesController}>
               {store.lengthNotes > 1 ?

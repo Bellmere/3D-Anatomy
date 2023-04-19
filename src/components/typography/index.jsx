@@ -7,7 +7,7 @@ export default function Typography({ content, humanApi }) {
     if (target.classList.contains('action-item')) {
       humanApi.setActionById(target.dataset.key);
     }
-  }, [content, humanApi]);
+  }, [humanApi]);
 
   useEffect(() => {
     const element = contentRef.current;
@@ -15,7 +15,7 @@ export default function Typography({ content, humanApi }) {
       element.addEventListener('click', eventAction);
     }
     return () => element?.removeEventListener('click', eventAction);
-  }, [contentRef.current]);
+  }, [contentRef.current, eventAction]);
 
   return (
     <div ref={contentRef} className="typography-component">
