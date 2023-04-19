@@ -1,0 +1,15 @@
+.group-button-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.group-button-pagination .group-button-pagination__label {
+  font-size: 14px;
+  padding: 14px 33px;
+  border-radius: 7px;
+  border: solid #D7D7D7 1px;
+  font-family: 'Roboto', sans-serif;
+  color: #353535;
+  font-weight: 500;
+}

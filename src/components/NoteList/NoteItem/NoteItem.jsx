@@ -16,14 +16,14 @@ export const NoteItem = ({ note, handleDelete }) => {
           <button
             className="note__btn"
             type="button"
-            onClick={() => handleDelete(note.id)}
+            onClick={() => handleDelete(note.uid)}
           >
             <TrashIcon className="note__icon" />
           </button>
-          <Link className="note__link" to={note.link}>
+          <Link className="note__link" to={`/viewer/${note.id}`}>
             <PenIcon className="note__icon" />
           </Link>
-          <Link className="note__link" to={note.link}>
+          <Link className="note__link" to={`/viewer/${note.id}`}>
             <SquareArrowIcon className="note__icon" />
           </Link>
         </div>

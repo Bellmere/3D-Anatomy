@@ -1,0 +1,21 @@
+.header-page {
+  display: flex;
+  gap: 20px;
+  height: 40px;
+  align-items: center;
+  padding: 15px 0;
+  box-sizing: content-box;
+}
+
+
+.header-page__title {
+  font-size: 20px;
+  font-family: Roboto;
+}
+.header-page__select {
+  height: 46px;
+  width: 250px;
+}
+.header-page__select > div {
+  min-height: 100%;
+}

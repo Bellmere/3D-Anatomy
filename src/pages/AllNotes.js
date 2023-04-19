@@ -1,46 +1,29 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useParams} from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import { Container } from 'components/styled/container/container';
 import { NoteList } from 'components/NoteList/NoteList';
 import { Filter } from 'components/filter/filter';
 
-export default function Notes() {
-  const [notes, setNotes] = useState([
-    { id: 'id-1', title: 'Anatomy Terminology Part 2', link: '#' },
-    { id: 'id-2', title: 'Anatomy Terminology Webinar Part 1', link: '#' },
-    { id: 'id-3', title: 'Ankle Sprain 2', link: '#' },
-    { id: 'id-4', title: 'Ankle Sprain Video', link: '#' },
-  ]);
-  const [filter, setFilter] = useState('');
+import { StoreContext, useContext } from '../context';
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'filter':
-        setFilter(value);
-        break;
-      default:
-        break;
-    }
-  };
+export default observer(function Notes() {
+  const { notes } = useContext(StoreContext);
+  const {  id  } = useParams();
+  useEffect(() => {
+    notes.setSearch('');
+    notes.getLearns(id);
+  }, [id, notes])
 
-  const getFiltredList = () => {
-    const searchList = notes.filter(note => {
-      return note.title?.toLowerCase().includes(filter.toLowerCase());
-    });
-    return searchList;
-  };
-
-  const handleDelete = e => {
-    setNotes(state => state.filter(note => note.id !== e));
-  };
-
+  console.log(111);
+ const handleChange = (text) => notes.setSearch(text);
   return (
     <section>
       <Container>
-        <Filter filter={filter} handleChange={handleChange} />
-        <NoteList notes={getFiltredList()} handleDelete={handleDelete} />
+        <Filter handleChange={handleChange} value={notes.textSearch}/>
+        <NoteList/>
       </Container>
     </section>
   );
-}
+})

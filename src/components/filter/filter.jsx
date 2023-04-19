@@ -6,7 +6,7 @@ import './filter.css';
 
 const filterId = nanoid();
 
-export const Filter = ({ filter, handleChange }) => {
+export const Filter = ({ handleChange, value }) => {
   return (
     <div className="filter--wrapper">
       <label className="filter__label" htmlFor={filterId}>
@@ -17,8 +17,8 @@ export const Filter = ({ filter, handleChange }) => {
         id={filterId}
         type="text"
         name="filter"
-        value={filter}
-        onChange={handleChange}
+        value={value}
+        onChange={(e) => handleChange(e.target.value)}
       />
       <div className='filter__icon--wrap'>
         <LoopIcon className='filter__icon' />

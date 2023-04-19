@@ -1,0 +1,78 @@
+.typography-component {
+  padding: 20px;
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.typography-component .action-item {
+  cursor: pointer;
+  color: #3f51b5;
+}
+/*Start Settings*/
+:root {
+  --main_color: #0D5D9A;
+  --second_color: #FDC82D;
+  --post_title_color: #293E51;
+  --article_bg_color: #F7F9FD;
+  --text_color:  #333333;
+  --font: 'Lexend Deca', sans-serif;
+}
+body{
+  font: 300 17px/1.5 var(--font);
+  color: var(--text_color);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+p{
+  margin-block-start: 1.4em;
+  margin-block-end: 1.4em;
+}
+strong {
+  font-weight: 500;
+}
+h1 {
+  font: 500 55px/1.2 var(--font);
+  color: var(--text_color);
+  margin: 0;
+  letter-spacing: 0px;
+}
+h2 {
+  font: 500 34px/1.2 var(--font);
+  color: var(--text_color);
+  margin: 0;
+}
+h3 {
+  font: 600 28px var(--font);
+  color: var(--text_color);
+}
+h4 {
+  font: 600 24px var(--font);
+  color: var(--text_color);
+  font-weight: 700;
+}
+h5 {
+  font: 600 20px var(--font);
+  color: var(--text_color);
+}
+h6 {
+  font: 600 18px var(--font);
+  color: var(--text_color);
+}
+@media(max-width: 767px) {
+  h1 {
+    font-size: 34px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  body {
+    font-size: 14px;
+  }
+  p{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+  }
+}

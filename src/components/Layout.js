@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { AppBar } from './header/appBar/appBar';
-import { Footer } from './footer/footer';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +14,6 @@ export const Layout = () => {
           <Outlet />
         </main>
       </Suspense>
-      <Footer />
       <ToastContainer
         position="top-right"
         autoClose={500}

@@ -12,7 +12,7 @@ export const Navigation = observer(() => {
   return (
     <nav className="main__nav">
       {menuList.map(item => (
-        <NavLink className="nav__link" key={item.path} to={item.path}>
+        <NavLink className="nav__link" key={item.path} to={item.getPath()}>
           {item.label}
         </NavLink>
       ))}

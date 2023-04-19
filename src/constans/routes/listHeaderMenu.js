@@ -1,3 +1,4 @@
 import { HOME, ALLNOTES } from './routes';
 
-export default [HOME, ALLNOTES];
+const listHeaderMenu = [HOME, ALLNOTES];
+export default listHeaderMenu;
