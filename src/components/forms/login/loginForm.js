@@ -16,6 +16,7 @@ export const LoginForm = observer(() => {
   const handleSubmit = async e => {
     e.preventDefault();
     const dataForm = Object.fromEntries(Array.from(new FormData(e.target)));
+    console.log(dataForm);
     const { email, password } = dataForm;
     const errors = validationFormLogin(dataForm);
     if (Object.keys(errors).length > 0) {

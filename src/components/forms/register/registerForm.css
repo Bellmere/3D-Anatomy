@@ -36,22 +36,16 @@
 }
 .auth__label {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  transform-origin: top left;
   font-size: 16px;
   line-height: 1.75;
+  color: #222;
   letter-spacing: 0.2px;
-  transform: translate(0, -5px) scale(1);
-  transition: color 300ms cubic-bezier(0, 0, 0.2, 1) 0ms,
-    transform 300ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transform: translate(0, -24px) scale(0.75);
+  transition: color 300ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
 .auth_require {
   color: red;
-}
-.auth__active {
-    color: #3f51b5;
-  transform: translate(0, -24px) scale(0.75);
-  transform-origin: top left;
 }
 .auth__input {
   width: 100%;
@@ -66,4 +60,7 @@
 }
 .auth__input:focus {
   border-color: #3f51b5;
+}
+.auth__input:focus + .auth__label {
+  color: #3f51b5;
 }
