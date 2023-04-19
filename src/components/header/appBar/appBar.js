@@ -39,12 +39,7 @@ export const AppBar = observer(() => {
     <header className="header">
       <Container>
         <div className="nav--wrapper">
-          <Logo />
-          <div className="navigation">
-            <Navigation />
-            {authUser.isAuth ? <UserMenu /> : <AuthNav />}
-          </div>
-          <div className="mobile__menu--wrapper">
+        <div className="mobile__menu--wrapper">
             <button
               className={`mobile__menu__btn ${
                 isAnimating ? 'is-animating' : ''
@@ -58,6 +53,8 @@ export const AppBar = observer(() => {
               )}
             </button>
           </div>
+          <Logo />
+            {authUser.isAuth ? <UserMenu /> : <AuthNav />}
         </div>
       </Container>
       {showMobileMenu && (
@@ -65,7 +62,6 @@ export const AppBar = observer(() => {
           <Container>
             <div className='mobile__menu--wrap'>
               <Navigation />
-              {authUser.isAuth ? <UserMenu /> : <AuthNav />}
             </div>
           </Container>
         </div>
