@@ -6,14 +6,13 @@ import { UserMenu } from 'components/header/userMenu/userMenu';
 import { Logo } from 'components/logo/logo';
 import { observer } from 'mobx-react-lite';
 import { StoreContext, useContext} from '../../../context';
-import { useProSidebar } from 'react-pro-sidebar';
+
 import { ReactComponent as MobileMenuIcon } from '../../../icons/mobile-menu.svg';
 import { ReactComponent as MobileMenuIconCross } from '../../../icons/mobile-menu-cross.svg';
 
 import './appBar.css';
 
 export const AppBar = observer(() => {
-  const { collapseSidebar, collapsed } = useProSidebar();
   const { authUser } = useContext(StoreContext);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const mobileMenuRef = useRef(null);
@@ -40,16 +39,7 @@ export const AppBar = observer(() => {
     <header className="header">
       <Container>
         <div className="nav--wrapper">
-          <Logo />
-          <div className="navigation">
-            <Navigation />
-            {authUser.isAuth ? <UserMenu /> : <AuthNav />}
-          </div>
-          <button onClick={() => {
-            collapseSidebar(!collapsed)
-          }}>toggle menu</button>
-
-          <div className="mobile__menu--wrapper">
+        <div className="mobile__menu--wrapper">
             <button
               className={`mobile__menu__btn ${
                 isAnimating ? 'is-animating' : ''
@@ -63,6 +53,8 @@ export const AppBar = observer(() => {
               )}
             </button>
           </div>
+          <Logo />
+            {authUser.isAuth ? <UserMenu /> : <AuthNav />}
         </div>
       </Container>
       {showMobileMenu && (
@@ -70,7 +62,6 @@ export const AppBar = observer(() => {
           <Container>
             <div className='mobile__menu--wrap'>
               <Navigation />
-              {authUser.isAuth ? <UserMenu /> : <AuthNav />}
             </div>
           </Container>
         </div>

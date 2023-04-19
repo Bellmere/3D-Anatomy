@@ -1,15 +1,6 @@
 .container {
-  max-width: 100%;
-  width: 100%;
-  padding: 0 15px;
-  margin: 0 auto;
-  height: 100%;
-}
-
-.container-full {
-  height: calc(100vh - 60px);
-  max-width: 100%;
-  width: 100%;
-  padding: 0 15px;
-  margin: 0 auto;
+    max-width: 1920px;
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
 }
