@@ -59,19 +59,21 @@ export default observer(function ViewerPage() {
       {store.noteSelected?.scene ?
         <div className='container-iframe'>
           <IFrameHuman scene={store.noteSelected.scene} init={init}>
-            { showResetButton ? <BaseButton handlerClick={reset}>Reset</BaseButton> : null }
+            {showResetButton ? <BaseButton handlerClick={reset}>Reset</BaseButton> : null}
           </IFrameHuman>
           <div className='header-page-typography'>
-            <div style={styleNotesController}>
-              {store.lengthNotes > 1 ?
+            {store.lengthNotes > 1 ?
+              <div style={styleNotesController}>
+
                 <GroupButtonPagination
                   current={store.selectedIndex}
                   count={store.lengthNotes}
                   label={store.noteSelected?.title + '  -  '}
                   handlerNext={nextNote}
                   handlerPrev={prevNote}
-                /> : null}
-            </div>
+                />
+              </div>
+              : null}
             <Typography content={store.noteSelected?.content} humanApi={humanApi} />
           </div>
         </div>

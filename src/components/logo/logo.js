@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as LogoIcon } from '../../icons/logo.svg';
 
-import './logo.css';
+import './style.css';
 
 export const Logo = () => {
   return (

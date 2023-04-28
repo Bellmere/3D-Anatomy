@@ -2,7 +2,7 @@ import { ColorRing } from 'react-loader-spinner';
 
 import { observer } from 'mobx-react-lite';
 import { StoreContext, useContext } from '../../context';
-import './loader.css';
+import './style.css';
 
 export const Loader = observer(() => {
   const { mainLoader } = useContext(StoreContext);

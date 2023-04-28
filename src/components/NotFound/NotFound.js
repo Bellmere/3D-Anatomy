@@ -1,5 +1,5 @@
 import { Container } from 'components/styled/container/container';
-import './NotFound.css';
+import './style.css';
 
 function NotFound() {
   return (

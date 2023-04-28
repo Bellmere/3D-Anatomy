@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { StoreContext, useContext} from '../../../context';
 import listHeaderMenu from 'constans/routes/listHeaderMenu';
 
-import './navigation.css';
+import './style.css';
 
 export const Navigation = observer(() => {
   const { authUser } = useContext(StoreContext);

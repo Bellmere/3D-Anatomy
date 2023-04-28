@@ -10,7 +10,7 @@ export const HOME = {
 };
 
 export const SINGUP = {
-  path: 'singup',
+  path: '/singup',
   label: 'Singup',
   getPath() {
     return this.path;
@@ -19,7 +19,7 @@ export const SINGUP = {
 };
 
 export const SINGIN = {
-  path: 'singin',
+  path: '/singin',
   label: 'Singin',
   getPath() {
     return this.path;
@@ -28,7 +28,7 @@ export const SINGIN = {
 };
 
 export const ALLNOTES = {
-  path: 'notes/region?/:id?',
+  path: '/notes/region?/:id?',
   getPath(id) {
     if(id === undefined) {
       return '/notes';
@@ -41,7 +41,7 @@ export const ALLNOTES = {
 
 
 export const VIEWER = {
-  path: 'viewer/:id',
+  path: '/viewer/:id',
   label: 'Viewer',
   getPath() {
     return this.path;
@@ -51,10 +51,19 @@ export const VIEWER = {
 
 
 export const ADD_MODEL = {
-  path: 'add-model',
+  path: '/add-model',
   label: 'Model',
   getPath() {
     return this.path;
   },
   handlePermission : isAuth,
 };
+
+export const CREATE_MODEL = {
+  path: '/create',
+  label: 'Create',
+  getPath() {
+    return this.path
+  },
+  handlePermission : isAuth,
+}

@@ -1,9 +1,33 @@
 .add-model-page__top-block {
   display: flex;
+  flex-direction: column;
   gap: 20px;
-  padding: 20px 0 ;
-}
-.add-model-page__top-block__input_url {
-  width: 400px;
 }
 
+.add-model-page__title {
+  font-size: 24px;
+  padding: 5px 0;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.add-model-page__content {
+  display: grid;
+  grid-template-columns: 30% auto;
+  grid-gap: 30px;
+  flex-grow: 1;
+}
+.add-model-page__aside {
+  background: #d3d3d3;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-model-page__aside-title {
+  font-size: 44px;
+}
+.add-model-page__switch {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}

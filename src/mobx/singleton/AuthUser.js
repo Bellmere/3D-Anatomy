@@ -14,10 +14,9 @@ class AuthUser {
     onAuthStateChanged(auth, this._updateUserAuth.bind(this));
   }
 
-  _updateUserAuth(user) {
+  async _updateUserAuth(user) {
     this.email = user?.email || '';
     this._isAuth = user ?? false;
-
     this.rootStore.mainLoader.isLoading = false;
   }
 

@@ -1,33 +1,39 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { observer } from 'mobx-react-lite';
 
 import { StoreContext, useContext } from '../../../context';
 import { validationFormLogin } from '../../../helpers';
-import { MainButton } from 'components/buttons/main/mainButton';
 import BaseInput from 'components/fields/baseInput';
+import BaseButton from '../../buttons/base';
 import ErrorCode from '../../../constans/error-code';
 
-import './loginForm.css';
+import './style.css';
 
 export const LoginForm = observer(() => {
   const { authUser } = useContext(StoreContext);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
     const dataForm = Object.fromEntries(Array.from(new FormData(e.target)));
-    console.log(dataForm);
     const { email, password } = dataForm;
     const errors = validationFormLogin(dataForm);
+
     if (Object.keys(errors).length > 0) {
       const errorMessages = Object.values(errors).join('\n');
       return toast.error(errorMessages);
     }
     try {
+      setLoading(true);
       const res = await authUser.logIn(email, password);
+      console.log(res);
       if (!res.success) throw new Error(res.errorCode);
     } catch (error) {
       toast.error(ErrorCode[error.message]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,7 +53,7 @@ export const LoginForm = observer(() => {
               isRequired
             />
           </div>
-          <MainButton>Sing In</MainButton>
+          <BaseButton loading={loading}>Sing In</BaseButton>
           <div className="singin__link--wrap">
             <Link className="singIn__link" to="/singup">
               Register

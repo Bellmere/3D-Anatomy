@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { NoteItem } from './NoteItem/NoteItem';
 import { StoreContext, useContext } from '../../context';
 
-import './NoteList.css';
+import './style.css';
 
 export const NoteList = observer(({ handleDelete }) => {
   const { notes } = useContext(StoreContext);

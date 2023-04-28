@@ -1,16 +1,18 @@
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { StoreContext, useContext } from '../../../context';
 import BaseInput from '../../fields/baseInput';
-import { MainButton } from 'components/buttons/main/mainButton';
+import BaseButton from '../../buttons/base';
 import { validationFormRegister } from '../../../helpers';
 
 import ErrorCode from '../../../constans/error-code';
-import './registerForm.css';
+import './style.css';
 
 export const RegisterForm = observer(() => {
   const { authUser } = useContext(StoreContext);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -22,10 +24,13 @@ export const RegisterForm = observer(() => {
     }
 
     try {
+      setLoading(true);
       const res = await authUser.createUserWithEmailAndPassword(dataForm);
       if (!res.success) throw new Error(res.errorCode);
     } catch (error) {
       toast.error(ErrorCode[error.message]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,7 +61,7 @@ export const RegisterForm = observer(() => {
               isRequired
             />
           </div>
-          <MainButton>Register</MainButton>
+          <BaseButton loading={loading}>Register</BaseButton>
         </form>
       </div>
     </div>

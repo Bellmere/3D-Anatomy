@@ -1,4 +1,4 @@
-import './container.css';
+import './style.css';
 
 export const Container = ({ children, full = false }) => {
     return (

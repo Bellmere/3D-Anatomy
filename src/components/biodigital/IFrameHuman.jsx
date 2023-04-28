@@ -11,10 +11,9 @@ const paramsIframe = [
   'dk=' + process.env.REACT_APP_BIO_PUBLIC_KEY,
 ];
 export default function IFrameHuman({ scene, init = () => {}, className = '', children }) {
-
   const idModel = scene?.length > 10 ? `m=${scene}.json` : `be=${scene}`
   return (
-    <div style={{position: 'relative', height: '100%'}}>
+    <div style={{position: 'relative', height: '100%', width: '100%'}}>
       <div style={{position: 'absolute', right: '20px', top: '20px'}}>
         {children}
       </div>

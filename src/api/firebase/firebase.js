@@ -4,8 +4,8 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYucVOAHZmVbDSZFjLvKM6dAO4CBfH_Uo",
-  authDomain: "anatomi-412f1.firebaseapp.com",
-  databaseURL: "https://anatomi-412f1.firebaseio.com",
+  authDomain: "anatomyappcp1.clinicalphysio.com",
+  databaseURL: "https://anatomyappcp1.clinicalphysio.com/",
   projectId: "anatomi-412f1",
   storageBucket: "anatomi-412f1.appspot.com",
   messagingSenderId: "809001845026",

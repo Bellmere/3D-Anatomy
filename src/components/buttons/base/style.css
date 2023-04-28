@@ -1,7 +1,7 @@
-/* CSS */
-.button-9 {
+.base_button {
+  position: relative;
   backface-visibility: hidden;
-  background-color: #405cf5;
+  background-color: #42A4CB;
   border-radius: 6px;
   border-width: 0;
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
@@ -26,15 +26,17 @@
   cursor: pointer;
 }
 
-.button-9:disabled {
+.base_button:disabled {
   cursor: default;
   opacity: 0.8;
   pointer-events: none;
+  background: #d3d3d3;
 }
-.button-9:hover {
+.base_button:hover {
   opacity: 0.9;
 }
 
-.button-9:focus {
+.base_button:focus {
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
+

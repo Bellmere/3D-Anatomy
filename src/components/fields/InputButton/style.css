@@ -1,3 +1,7 @@
+.left_label_input {
+  width: 100%;
+  position: relative;
+}
 .left_label_input .btn {
   display: inline-block;
   background: transparent;
@@ -12,15 +16,21 @@
 }
 
 .left_label_input .btn--primary {
-  background: #2d72dc;
+  background: #42A4CB;
   color: #fff;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
   border-radius: 2px;
   padding: 12px 36px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 40px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .left_label_input .btn--primary:disabled {
-  background: #7f8ff4;
+  background: #d3d3d3;
 }
 
 .left_label_input .btn--primary:active {
@@ -33,12 +43,14 @@
 }
 
 .left_label_input .form__field {
-  width: 530px;
+  width: 100%;
   background: #fff;
   color: #a3a3a3;
   font: inherit;
+  font-size: 14px;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .1);
-  border: 0;
+  border-radius: 5px;
   outline: 0;
+  border: solid 1px #42A4CB;
   padding: 22px 18px;
 }

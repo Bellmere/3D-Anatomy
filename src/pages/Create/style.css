@@ -1,0 +1,13 @@
+.create_page__title {
+  font-size: 24px;
+  font-family: "Roboto";
+  padding: 5px 0;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.create_page_controller {
+  background: rgba(66, 164, 203, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  color: #ffffff;
+}

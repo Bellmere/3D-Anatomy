@@ -1,30 +1,35 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import IFrameHuman from '../../components/biodigital/IFrameHuman';
-import LeftLabelInput from '../../components/fields/leftLabelInput/leftLabelInput';
-import './style.css'
-const newParams = (url) => {
-  const source = new URLSearchParams(url.replace('?', '&'));
-  return source.get('id');
-};
+import Switch from '../../components/fields/switch';
+import AddHumanModel from './add-human-model';
+import ShowAllModel from './show-all-model';
+import './style.css';
 export default function AddModelPage() {
-  const [paramsId, setParamsId] = useState('');
-  return (
-    <div className="container" style={{display: 'flex', flexDirection: 'column'}}>
-      <h2>Model Page</h2>
-      <div className="add-model-page__top-block">
-        <input type='text' className="add-model-page__top-block__input_url" onChange={({ target }) => {
-          const sourceId = newParams(target.value);
-          if (sourceId) {
-            setParamsId(sourceId);
-          }
-        }} />
-        <LeftLabelInput disabled={!paramsId} label="Save" placeholder="Please enter url model" />
+  const [uri, setUri] = useState(null);
+  const [isCreateModel, setCreateModel] = useState(true);
 
-        {paramsId}
+  useEffect(() => {
+    setUri(null);
+  }, [isCreateModel])
+
+  return (
+    <div className='container' style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className='add-model-page__switch'>
+        <h2 className='add-model-page__title'>Model Page</h2>
+        <Switch onSwitch={setCreateModel} checked={isCreateModel}>
+          {isCreateModel ? 'Add new model' : 'All models'}
+        </Switch>
       </div>
 
-      {!!paramsId ? <IFrameHuman scene={paramsId} /> : null}
+      <div className='add-model-page__content'>
+        <div className='add-model-page__top-block'>
+          {isCreateModel ? <AddHumanModel changeUri={setUri}/> : <ShowAllModel changeUri={setUri} selected={!!uri}/>}
+        </div>
+        <div className='add-model-page__aside'>
+          {!!uri ? <IFrameHuman scene={uri} /> :
+            <h4 className='add-model-page__aside-title'>Please enter url model</h4>}
+        </div>
+      </div>
     </div>
   );
 }

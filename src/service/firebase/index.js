@@ -1,1 +1,0 @@
-const db = getFirestore(app);

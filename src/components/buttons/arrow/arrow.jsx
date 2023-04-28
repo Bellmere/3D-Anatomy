@@ -4,8 +4,8 @@ import ArrowRight from '../../../svg/arrow-right';
 import './style.css'
 export default function ArrowButton({ handlerClick, position = 'left', style }) {
   return (
-    <div onClick={handlerClick} className="arrow_button" style={style}>
+    <button onClick={handlerClick} className="arrow_button" style={style} role="button">
       { position === 'left' ? <ArrowLeft /> : <ArrowRight />}
-    </div>
+    </button>
   )
 }

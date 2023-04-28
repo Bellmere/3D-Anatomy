@@ -4,7 +4,7 @@ import { ReactComponent as TrashIcon } from '../../../icons/trash.svg';
 import { ReactComponent as PenIcon } from '../../../icons/pen.svg';
 import { ReactComponent as SquareArrowIcon } from '../../../icons/square-arrow.svg';
 
-import './NoteItem.css';
+import './style.css';
 
 export const NoteItem = ({ note, handleDelete }) => {
 

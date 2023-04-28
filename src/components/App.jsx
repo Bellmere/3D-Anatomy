@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
@@ -9,14 +8,17 @@ import { StoreContext, useContext } from '../context';
 import ROUTES from 'constans/routes';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import SideBar from './sidebar';
-import Index from '../pages/AddModelPage';
 
-const HomePage = lazy(() => import('../pages/Home'));
-const RegisterPage = lazy(() => import('../pages/Register'));
-const SingInPage = lazy(() => import('../pages/SingIn'));
-const NotFoundPage = lazy(() => import('./NotFound/NotFound'));
-const AllNotesPage = lazy(() => import('../pages/AllNotes'));
-const ViewerPage = lazy(() => import('../pages/Viewer'));
+
+import HomePage from '../pages/Home';
+import RegisterPage from '../pages/Register';
+import SingInPage from '../pages/SingIn';
+import NotFoundPage from './NotFound/NotFound';
+import AllNotesPage from '../pages/AllNotes';
+import ViewerPage from '../pages/Viewer';
+import CreatePage from '../pages/Create';
+import AddModelPage from '../pages/AddModelPage';
+
 
 export const App = observer(() => {
   const { authUser } = useContext(StoreContext);
@@ -27,10 +29,11 @@ export const App = observer(() => {
         <Helmet>
           <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>
           <script src='https://developer.biodigital.com/builds/api/2/human-api.min.js'></script>
+          <title>Anatomy App</title>
         </Helmet>
       </HelmetProvider>
       <Loader />
-      <SideBar />
+      {authUser.isAuth === null ? null : <SideBar />}
       {authUser.isAuth === null ? null :
         <Routes>
           <Route path={ROUTES.HOME.path} element={<Layout />}>
@@ -89,9 +92,19 @@ export const App = observer(() => {
               path={ROUTES.ADD_MODEL.path}
               element={
                 <PrivateRoute
-                  component={<Index />}
+                  component={<AddModelPage />}
                   redirectTo={ROUTES.SINGIN.path}
                   guard={ROUTES.ADD_MODEL}
+                />
+              }
+            />
+            <Route
+              path={ROUTES.CREATE_MODEL.path}
+              element={
+                <PrivateRoute
+                  component={<CreatePage />}
+                  redirectTo={ROUTES.CREATE_MODEL.path}
+                  guard={ROUTES.CREATE_MODEL}
                 />
               }
             />

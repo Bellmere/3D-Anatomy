@@ -3,7 +3,7 @@ import { StoreContext, useContext} from '../../../context';
 
 import { ReactComponent as DoorOutIcon } from '../../../icons/door-out.svg';
 
-import './userMenu.css';
+import './style.css';
 
 export const UserMenu = observer(() => {
   const { authUser } = useContext(StoreContext);
