@@ -4,7 +4,6 @@ import Select from 'react-select';
 import useModels from '../../hooks/useModels';
 import AddActionModal from '../modal/add-action';
 export default observer(function NoteComponent({ noteApi }) {
-  console.log(noteApi);
   const { selectedOption, optionsList } = useModels();
   const [selected, setSelected] = useState({ value: null });
   useEffect(() => {

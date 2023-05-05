@@ -10,11 +10,9 @@ export default class AddModel {
   }
 
   async save() {
-    const res = await addDoc(collection(db, this.table), {
+    await addDoc(collection(db, this.table), {
       uri: this.uri,
       title: this.title,
     })
-
-    console.log(res);
   }
 }

@@ -15,7 +15,7 @@ export default function Typography({ content, humanApi }) {
       element.addEventListener('click', eventAction);
     }
     return () => element?.removeEventListener('click', eventAction);
-  }, [contentRef.current, eventAction]);
+  }, [eventAction]);
 
   return (
     <div ref={contentRef} className="typography-component">

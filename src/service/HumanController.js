@@ -1,7 +1,12 @@
+import HumanUpdateScreen from '../mixin/human-update-screen';
 export default class HumanController {
   constructor() {
     this._human = new window.HumanAPI('myWidget');
     this.scenePicked = [];
+    this.objectsShown = [];
+    this.objectsSelected = [];
+    this.labelsPicked = [];
+    Object.assign(this, HumanUpdateScreen);
     this.addEvent();
   }
   get api () {
@@ -13,17 +18,33 @@ export default class HumanController {
         this.scenePicked.forEach(fn => fn(pick));
       }
     });
-  }
 
-  subscribeScenePicked(callback) {
-    const find = this.scenePicked.find(fn => fn === callback);
+    this.api.on('scene.objectsShown', (objects) => {
+      this.objectsShown.forEach(callback => callback(objects))
+    })
+    this.api.on('scene.objectsSelected', (objects) => {
+      this.objectsSelected.forEach(callback => callback(objects))
+    })
+
+    this.api.on('labels.picked', picked => {
+      this.labelsPicked.forEach(callback => callback(picked))
+    })
+
+  }
+  updateCamera(action) {
+    this._updateCamera(this.api, action);
+  }
+  subscribe(callback, type) {
+    if(!this[type]) throw Error('not found type event')
+    const find = this[type].find(fn => fn === callback);
     if (find === undefined) {
-      this.scenePicked.push(callback);
+      this[type].push(callback);
     }
 
   }
 
-  unsubscribeScenePicked(callback) {
-    this.scenePicked = this.scenePicked.filter(fn => fn !== callback);
+  unsubscribe(callback, type) {
+    if(!this[type]) throw Error('not found type event')
+    this[type] = this[type].filter(fn => fn !== callback);
   }
 }

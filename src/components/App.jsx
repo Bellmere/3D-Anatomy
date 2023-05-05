@@ -17,6 +17,7 @@ import NotFoundPage from './NotFound/NotFound';
 import AllNotesPage from '../pages/AllNotes';
 import ViewerPage from '../pages/Viewer';
 import CreatePage from '../pages/Create';
+import EditPage from '../pages/EditPage';
 import AddModelPage from '../pages/AddModelPage';
 
 
@@ -105,6 +106,16 @@ export const App = observer(() => {
                   component={<CreatePage />}
                   redirectTo={ROUTES.CREATE_MODEL.path}
                   guard={ROUTES.CREATE_MODEL}
+                />
+              }
+            />
+            <Route
+              path={ROUTES.EDIT_MODEL.path}
+              element={
+                <PrivateRoute
+                  component={<EditPage />}
+                  redirectTo={ROUTES.EDIT_MODEL.path}
+                  guard={ROUTES.EDIT_MODEL}
                 />
               }
             />

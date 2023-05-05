@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { NoteItem } from './NoteItem/NoteItem';
 import { StoreContext, useContext } from '../../context';
-
 import './style.css';
 
 export const NoteList = observer(({ handleDelete }) => {

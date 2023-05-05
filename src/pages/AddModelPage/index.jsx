@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import IFrameHuman from '../../components/biodigital/IFrameHuman';
+import IFrameHuman from '../../components/biodigital/iframe-human/IFrameHuman';
 import Switch from '../../components/fields/switch';
 import AddHumanModel from './add-human-model';
 import ShowAllModel from './show-all-model';

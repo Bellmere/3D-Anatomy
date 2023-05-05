@@ -7,7 +7,7 @@ import HumanApi from '../mobx/localStore/HumanApi';
 import HeaderPageView from '../components/header-page/HeaderPageView';
 
 import Typography from '../components/typography';
-import IFrameHuman from '../components/biodigital/IFrameHuman';
+import IFrameHuman from '../components/biodigital/iframe-human/IFrameHuman';
 import GroupButtonPagination from '../components/buttons/group-button-pagination';
 import BaseButton from '../components/buttons/base';
 
@@ -64,7 +64,6 @@ export default observer(function ViewerPage() {
           <div className='header-page-typography'>
             {store.lengthNotes > 1 ?
               <div style={styleNotesController}>
-
                 <GroupButtonPagination
                   current={store.selectedIndex}
                   count={store.lengthNotes}

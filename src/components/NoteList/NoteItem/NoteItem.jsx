@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import { EDIT_MODEL } from '../../../constans/routes/routes';
 import { ReactComponent as TrashIcon } from '../../../icons/trash.svg';
 import { ReactComponent as PenIcon } from '../../../icons/pen.svg';
 import { ReactComponent as SquareArrowIcon } from '../../../icons/square-arrow.svg';
@@ -20,7 +20,7 @@ export const NoteItem = ({ note, handleDelete }) => {
           >
             <TrashIcon className="note__icon" />
           </button>
-          <Link className="note__link" to={`/viewer/${note.id}`}>
+          <Link className="note__link" to={EDIT_MODEL.getPath(note.id)}>
             <PenIcon className="note__icon" />
           </Link>
           <Link className="note__link" to={`/viewer/${note.id}`}>

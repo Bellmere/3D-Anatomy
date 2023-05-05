@@ -5,7 +5,7 @@ import Select from 'react-select';
 import BaseButton from '../../components/buttons/base';
 import ModalConfirm from '../../components/modal/confirm';
 
-export default function ShowAllModel({ changeUri, selected }) {
+export default function ShowAllModel({ changeUri, selected, defaultIndex }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [selectedId, setSelectedById] = useState(null);
   const { removeModel, optionsList, selectedOption } = useModels();

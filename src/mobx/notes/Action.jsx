@@ -9,18 +9,22 @@ export default class Action {
                 objectsShown = {},
                 order = 0,
                 title = '',
-                description = '',
               }) {
     this.camera = camera;
     this.labels = labels;
+    this.title = title;
     this.objectsSelected = objectsSelected;
     this.objectsShown = objectsShown;
     this.order = order;
-    this.title = title;
-    this.description = description;
-    this.id = id;
-    this.scene = null;
+    this.id = id === null ? new Date().getTime().toString() : id;
     makeAutoObservable(this);
   }
 
+
+  getLabel(labelId) {
+    return this.labels.find(item => labelId === item.id);
+  }
+  update(options) {
+    Object.assign(this, options);
+  }
 }

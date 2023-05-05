@@ -10,4 +10,41 @@
   padding: 10px;
   border-radius: 10px;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.create_page_controller_footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+.create_page__container {
+  display: flex;
+  flex-direction: column;
+}
+.create_page__content {
+  display: grid;
+  grid-template-columns: 70% auto;
+  flex-grow: 1;
+}
+.create_page_top_controller {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+.create_page_top_controller_button {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.create_page_editor {
+  display: flex;
+  flex-direction: column;
+}
+.create_page_editor > div {
+  flex-grow: 1;
 }

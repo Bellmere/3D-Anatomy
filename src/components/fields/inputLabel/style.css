@@ -44,6 +44,8 @@
 
 .form-group > span:last-child, .form-group .form-field:last-child {
   border-radius: 0 6px 6px 0;
+  display: flex;
+  align-items: center;
 }
 
 .form-group > span:not(:first-child), .form-group .form-field:not(:first-child) {

@@ -43,8 +43,8 @@ export const ALLNOTES = {
 export const VIEWER = {
   path: '/viewer/:id',
   label: 'Viewer',
-  getPath() {
-    return this.path;
+  getPath(id) {
+    return id ? this.path.replace(':id', id) : this.path;
   },
   handlePermission : isAuth,
 };
@@ -64,6 +64,15 @@ export const CREATE_MODEL = {
   label: 'Create',
   getPath() {
     return this.path
+  },
+  handlePermission : isAuth,
+}
+
+export const EDIT_MODEL = {
+  path: '/edit/:id',
+  label: 'Edit',
+  getPath(id) {
+    return `/edit/${id}`;
   },
   handlePermission : isAuth,
 }

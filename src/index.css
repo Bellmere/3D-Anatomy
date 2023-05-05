@@ -83,3 +83,14 @@ input:-webkit-autofill {
 .z-index-1000 {
   z-index: 1000;
 }
+
+
+.button_delete {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  outline: none;
+  border: none;
+  gap: 5px;
+  cursor: pointer;
+}

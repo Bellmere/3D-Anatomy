@@ -5,8 +5,8 @@ import Select from 'react-select';
 
 import CATEGORIES from '../../../constans/structure';
 
-export default observer(function NotesModal({ notesApi }) {
-  if (!notesApi.isOpenedModalNotes) return null;
+export default observer(function NotesModal({ store }) {
+  if (!store.isOpenedModalLearn) return null;
 
   const options = Object.keys(CATEGORIES.REGION).map(key => ({
     value: key,
@@ -16,11 +16,10 @@ export default observer(function NotesModal({ notesApi }) {
     <ModalConfirm
       cancelButtonLabel=''
       confirmButtonLabel={'Create'}
-      onClose={notesApi.hideModal.bind(notesApi)}
-      onConfirm={notesApi.createNotes.bind(notesApi, 'UPPER_LIMB', 'title')}
+      onClose={store.toggleModalLearn.bind(store)}
+      onConfirm={store.setNewLearn.bind(store, 'UPPER_LIMB', 'title')}
     >
       <div style={{ width: '50vw', height: '10vh', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-
         <InputLabel
           label='Title'
           placeholder='Title'

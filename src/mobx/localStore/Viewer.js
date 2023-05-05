@@ -39,7 +39,7 @@ export default class Viewer {
   }
 
   * getSubCollection() {
-    this.learn.getSubCollection();
+     yield this.learn.getSubCollection();
   }
   * getSingleLearnById(id) {
     let docRef = yield getDoc(doc(db, `note_sets`, id));

@@ -24,8 +24,22 @@
   touch-action: manipulation;
   width: auto;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
-
+.base_button__remove {
+  background-color: #ff0000;
+}
+.base_button__cancel {
+  background-color: #d3d3d3;
+}
+.base_button__white {
+  background-color: #ffffff;
+  border-radius: 7px;
+  color: #353535;
+  border: solid 1px #42A4CB;
+}
 .base_button:disabled {
   cursor: default;
   opacity: 0.8;
