@@ -34,7 +34,7 @@ export default function EditPage() {
     getFetch();
   }, [id]);
 
-  if (initState === null) return null;
+  if (initState === null || loading) return null;
   return (
     <Create initState={initState} />
   );

@@ -38,7 +38,7 @@ export default observer(function ViewerPage() {
     if(humanApi.human && humanApi.listActions?.length) {
       humanApi.updateCamera();
     }
-  }, [humanApi.listActions])
+  }, [humanApi.listActions, humanApi])
   const init = () => {
     setShowResetButton(true);
     humanApi.init();
