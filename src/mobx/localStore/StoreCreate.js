@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
-import { db, auth, app } from '../../api/firebase/firebase';
-import { setDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db, auth } from '../../api/firebase/firebase';
+import { uniqueId } from '../../helpers';
+import { collection, addDoc, serverTimestamp, getDocs, writeBatch, doc } from 'firebase/firestore';
 import Action from '../notes/Action';
 
 class Notes {
@@ -16,10 +17,20 @@ class Notes {
     this.order = order;
     this.content = content;
     this.title = title;
-    this.actions = actions;
+    this.actions = actions?.length ? actions.map(action => new Action(action)) : [];
     this.selectedAction = null;
     this.scene = scene;
     makeAutoObservable(this);
+  }
+
+  get isValid() {
+    return this.title?.length > 2;
+  }
+
+  firstSelectedAction() {
+    if (this.actions?.length) {
+      this.selectedAction = this.actions[0];
+    }
   }
 
   resetActions() {
@@ -98,6 +109,21 @@ export default class StoreCreate {
     this.edit = false;
     this.newScreen = false;
     makeAutoObservable(this);
+  }
+
+  initState(state) {
+    this.data = state.learn;
+    this.notes = state.notes.map(note => new Notes(note));
+    this.notes.forEach(note => note.firstSelectedAction());
+    this.selectedNote = this.notes[0] || null;
+  }
+
+  setDataTitle(title) {
+    this.data.title = title;
+  }
+
+  setDataRegion(region) {
+    this.data.region = region;
   }
 
   toggleModalLearn() {
@@ -193,15 +219,35 @@ export default class StoreCreate {
     if (this.data.id === null) {
       return await this.addDocFirebase();
     } else {
-      await this.updateDocFirebase()
+      await this.updateDocFirebase();
     }
 
   }
-  async updateDocFirebase() {
 
+  async updateDocFirebase() {
+    const refNotes = await getDocs(collection(db, `note_sets/${this.data.id}/notes`));
+    const notes = [];
+    refNotes.forEach(note => notes.push(note));
+    const batch = writeBatch(db);
+    const deletedList = [];
+    for (let note of notes) {
+      deletedList.push(getDocs(collection(db, `note_sets/${this.data.id}/notes/${note.id}/actions`)));
+      batch.delete(doc(db, `note_sets/${this.data.id}/notes/`, note.id));
+    }
+    Promise.all(deletedList).then(async (items) => {
+      const list = [];
+      for(let item of items) {
+        item.forEach(action => list.push(action));
+      }
+      list.forEach(item => {
+        batch.delete(doc(db, item.ref.parent.path, item.id))
+      })
+      await this.saveNotes(this.data.id, this.notes, batch);
+    })
   }
 
   async addDocFirebase() {
+    const batch = writeBatch(db);
     try {
       const docRef = await addDoc(collection(db, 'note_sets'), {
         ...this.data,
@@ -209,36 +255,50 @@ export default class StoreCreate {
         last_modified: serverTimestamp(),
       });
       this.data.id = docRef.id;
-      await this.saveNotes(this.data.id, this.notes);
-      return docRef.id
+      await this.saveNotes(this.data.id, this.notes, batch);
+      return docRef.id;
     } catch (e) {
       console.log(e);
     }
   }
 
-  async saveNotes(docId, notes) {
+  async saveNotes(docId, notes, batch) {
     let order = 0;
     for (const note of notes) {
-      const noteRef = await addDoc(collection(db, 'note_sets', docId, 'notes'), {
+      const spanClass = new RegExp('<span class="action-item">', 'gi');
+      const span = new RegExp('</span>', 'gi');
+      note.content = note.content.replace(spanClass, '');
+      note.content = note.content.replace(span, '');
+      note.actions.forEach(({ title, id }) => {
+        const reg = new RegExp(title, 'gi');
+        note.content = note.content.replace(reg, `<span class='action-item' data-key="${id}">${title}</span>`);
+      });
+
+      const id = uniqueId();
+      const noteRef = doc(db, `note_sets/${docId}/notes`, id);
+
+      batch.set(noteRef, {
         order,
         content: note.content,
         title: note.title,
         scene: note.scene,
       });
       order = order + 1;
-
-      await this.saveActions(docId, noteRef.id, note.actions);
+      this.saveActions(docId, id, note.actions, batch);
     }
+    await batch.commit();
   }
 
-  async saveActions(docId, noteId, actions) {
+  saveActions(docId, noteId, actions, batch) {
     let order = 0;
     for (const action of actions) {
-      await addDoc(collection(db, 'note_sets', docId, 'notes', noteId, 'actions'), {
+      const refAction = doc(db, `note_sets/${docId}/notes/${noteId}/actions`, action.id);
+      batch.set(refAction, {
         order,
         camera: action.camera,
         labels: action.labels,
         title: action.title,
+        id: action.id,
         objectsSelected: action.objectsSelected,
         objectsShown: action.objectsShown,
       });

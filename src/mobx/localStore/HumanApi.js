@@ -5,6 +5,7 @@ export default class HumanApi {
   constructor() {
     this.currentAction = null;
     this.note = null;
+    this.prevSelectedAction = null;
     Object.assign(this, HumanUpdateScreenMixin);
     makeAutoObservable(this);
   }
@@ -32,18 +33,18 @@ export default class HumanApi {
   get listActions() {
     return this.note?.actions || [];
   }
-
-
-
   updateCamera() {
     const action = this.listActions[this.currentAction];
-    if(action === undefined) return;
-    this._updateCamera(this.human, action);
+    if(action === undefined || action === this.prevSelectedAction) return;
+    console.log(action)
 
+    this.prevSelectedAction = action;
+    this._updateCamera(this.human, action);
   }
 
 
   setActionById(id) {
+
     const findIndex = this.listActions.findIndex(item => item.id === id);
 
     if(findIndex !== -1) {
@@ -53,6 +54,7 @@ export default class HumanApi {
 
   }
   nextAction() {
+
     if (this.currentAction + 1 >= this.listActions.length) {
       return;
     }
@@ -62,6 +64,7 @@ export default class HumanApi {
   }
 
   prevAction() {
+
     if (this.currentAction - 1 < 0) {
       return;
     }

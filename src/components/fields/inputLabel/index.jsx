@@ -14,6 +14,7 @@ export default function InputLabel({
                                      rows = 1,
                                      cols = 50,
                                      style = {},
+                                     error = false,
                                    }) {
 
 
@@ -39,7 +40,7 @@ export default function InputLabel({
           onChange={({ target }) => handlerChange(target.value)}
         />
       }
-      <span style={{ width: labelWidth }}>{label}</span>
+      <span style={{ width: labelWidth }} className={`${error ? 'error' : ''}`}>{label}</span>
     </div>
   );
 }

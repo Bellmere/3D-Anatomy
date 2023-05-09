@@ -15,7 +15,7 @@ export default class Note {
   }
 
   * getActions() {
-    if(this.id !== null) {
+    if(this.actions.length === 0) {
       const subCollection = yield getDocs(query(collection(db, 'note_sets', this.parentId, 'notes', this.id, 'actions'), orderBy('order')));
       const actions = [];
       subCollection.forEach(item => actions.push(item.data()));

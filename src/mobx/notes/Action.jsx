@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { uniqueId } from '../../helpers';
 
 export default class Action {
   constructor({
@@ -16,10 +17,12 @@ export default class Action {
     this.objectsSelected = objectsSelected;
     this.objectsShown = objectsShown;
     this.order = order;
-    this.id = id === null ? new Date().getTime().toString() : id;
+    this.id = id === null ? uniqueId() : id;
     makeAutoObservable(this);
   }
-
+  get isValid() {
+    return this.title?.length > 2;
+  }
 
   getLabel(labelId) {
     return this.labels.find(item => labelId === item.id);

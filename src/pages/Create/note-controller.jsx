@@ -12,7 +12,6 @@ import BasketSvg from '../../svg/basket';
 export default observer(function NoteController({ store, human }) {
   const [isOpened, setOpened] = useState(false);
   const updateCamera = () => {
-    console.log(store.selectedAction);
     if(store.selectedAction instanceof Action) {
       human.updateCamera(store.selectedAction)
     } else {
@@ -31,8 +30,10 @@ export default observer(function NoteController({ store, human }) {
   };
 
   const addNote = () => {
-    store.addNewNote();
-    updateCamera();
+    if(store.selectedNote.isValid) {
+      store.addNewNote();
+      updateCamera();
+    }
   };
 
 
@@ -45,7 +46,6 @@ export default observer(function NoteController({ store, human }) {
 
   const saveNotes = async () => {
     const id = await store.saveFirebase();
-    console.log(VIEWER.getPath(id));
     navigate(VIEWER.getPath(id))
   }
   return (

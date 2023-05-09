@@ -26,7 +26,6 @@ export default function useController(store, human) {
   const updateScreen = () => {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
-        console.log({...objectsShown}, 'update');
         store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title);
         setEvents({ ...EVENTS });
         objectsShown.current = {};
@@ -68,7 +67,6 @@ export default function useController(store, human) {
 
   useEffect(() => {
     if(events.editAnnotation) {
-      console.log(store.selectedAction.objectsShown, 'store.selectedAction.objectsShownstore.selectedAction.objectsShown');
       objectsShown.current = store.selectedAction.objectsShown  ? { ...store.selectedAction.objectsShown } : {};
     } else if (events.addAnnotation) {
       objectsShown.current = {}
@@ -79,9 +77,12 @@ export default function useController(store, human) {
 
     const shownObject = obj => {
       if (store.edit ||  store.newScreen) {
-        const [key] = Object.keys(obj);
-        if (objectsShown.current[key] !== undefined) delete objectsShown.current[key];
-        else objectsShown.current[key] = obj[key];
+        const keys = Object.keys(obj);
+        keys.forEach(key => {
+          if (objectsShown.current[key] !== undefined) delete objectsShown.current[key];
+          else objectsShown.current[key] = obj[key];
+        })
+
       }
     };
     human.subscribe(shownObject, 'objectsShown');

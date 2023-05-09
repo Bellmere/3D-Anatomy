@@ -11,37 +11,43 @@ export default function ListModels({ changeUri, isOpenConfirm, selected }) {
 
   const selectedModel = ({ uri, value }) => {
     setSelectedById(value);
-    if(!isOpenConfirm) {
+    if (!isOpenConfirm || selectedId === null) {
       changeUri(uri);
     } else {
       setShowConfirm(true);
-      setUri({uri, value});
+      setUri({ uri, value });
     }
   };
 
   useEffect(() => {
-    const [first] = optionsList;
-    if (selectedId === null && first) {
-      selectedModel({ uri: first.uri, value: first.value });
+    const option = optionsList.find(item => item.uri === selected)
+
+    if(option) {
+      setSelectedById(option.value);
+    } else {
+      const [first] = optionsList;
+      if (selectedId === null && first) {
+        selectedModel({ uri: first.uri, value: first.value });
+      }
     }
+
   }, [optionsList]);
 
   useEffect(() => {
-    if(!selected && selectedId) {
+    if (!selected && selectedId) {
       const find = optionsList.find(item => item.value === selectedId);
-      changeUri(find.uri)
+      changeUri(find.uri);
     }
-  }, [selected])
+  }, [selected]);
 
   const confirm = () => {
     changeUri(uri.uri);
     setShowConfirm(false);
-  }
-
+  };
   const cancel = () => {
     setSelectedById(uri.value);
-    setShowConfirm(false)
-  }
+    setShowConfirm(false);
+  };
   return (
     <>
       {showConfirm ?

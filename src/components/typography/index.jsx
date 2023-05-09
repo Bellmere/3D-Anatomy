@@ -8,7 +8,6 @@ export default function Typography({ content, humanApi }) {
       humanApi.setActionById(target.dataset.key);
     }
   }, [humanApi]);
-
   useEffect(() => {
     const element = contentRef.current;
     if (contentRef.current) {

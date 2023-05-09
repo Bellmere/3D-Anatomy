@@ -26,7 +26,6 @@ export default observer(function TopController({ store, human, children }) {
     store.selectedNote.resetActions();
     store.selectedNote.setScene(value)
   };
-
   return (
     <div className='create_page_top_controller'>
       <h2 className='create_page__title'>Create page</h2>

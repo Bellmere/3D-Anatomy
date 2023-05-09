@@ -9,7 +9,8 @@ export default function ModalConfirm({
                                        children,
                                        confirmButtonLabel = 'Yes',
                                        cancelButtonLabel = 'No',
-                                        width = 'auto'
+                                       width = 'auto',
+                                       disabled = false,
                                      }) {
   return (
     <div className='confirm_modal'>
@@ -18,11 +19,11 @@ export default function ModalConfirm({
         <div className='confirm_modal__close'>
           <ButtonCross onClose={onClose} />
         </div>
-        <div className='confirm_modal__content' style={{width}}>
+        <div className='confirm_modal__content' style={{ width }}>
           {content || children}
         </div>
         <div className='confirm_modal__footer'>
-          <button onClick={onConfirm}>{confirmButtonLabel}</button>
+          <button onClick={onConfirm} disabled={disabled}>{confirmButtonLabel}</button>
           {cancelButtonLabel !== '' ? <button onClick={onCancel}>{cancelButtonLabel}</button> : null}
         </div>
       </div>

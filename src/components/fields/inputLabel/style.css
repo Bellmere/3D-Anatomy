@@ -80,3 +80,6 @@
   border-color: #42A4CB;
   opacity: 0.9;
 }
+.form-group span.error {
+  background-color: #fb3b1e;
+}

@@ -23,7 +23,7 @@ export default class Notes {
       this.notes = notes;
     }
   }
-  
+
   addNewNote(note) {
     this.notes.push(new Note({ content: '', id: null, order: this.notes.length, title: '', parentId: this.id }))
   }

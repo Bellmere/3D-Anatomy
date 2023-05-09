@@ -13,12 +13,20 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './style.css';
 
-export default observer(function CreatePage() {
+export default observer(function CreatePage({ initState = null }) {
+
+
   const [store] = useState(new StoreCreate());
   const [human, setHumanApi] = useState(null);
   const init = () => {
     setHumanApi(new HumanController('myWidget'));
   };
+
+  useEffect(() => {
+    if(initState !== null) {
+      store.initState(initState)
+    }
+  }, [])
 
   useEffect(() => {
     if(human instanceof HumanController) {
@@ -31,7 +39,7 @@ export default observer(function CreatePage() {
 
   const setTitleNote = value => store.selectedNote.setTitle(value);
 
-  if(!store.data.title && !store.data.region) {
+  if(!store.data.title || !store.data.region) {
     return <NotesModal store={store} />
   }
   return (
@@ -51,6 +59,7 @@ export default observer(function CreatePage() {
                 style={{maxHeight: '50px'}}
                 label='Note Name'
                 placeholder='name'
+                error={store.selectedNote?.title?.length < 3}
                 value={store.selectedNote?.title || ''}
                 active={store.selectedNote?.title?.length > 2}
                 handlerChange={setTitleNote}

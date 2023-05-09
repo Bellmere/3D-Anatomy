@@ -1,3 +1,4 @@
+import { useEffect, useState, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import useController from '../../../hooks/useControlle';
 import AddNewAnnotation from './add-new-annotation';
@@ -7,6 +8,8 @@ import InputLabel from '../../fields/inputLabel';
 
 
 export default observer(function ControllerIFrame({ store, human }) {
+
+
   const {
     events,
     saveScreen,
@@ -19,6 +22,19 @@ export default observer(function ControllerIFrame({ store, human }) {
     setTitle,
   } = useController(store, human);
 
+  const [titleError, setTitleError] = useState(false);
+
+
+  const saveScreenEndValidation = () => {
+    if (!titleError) {
+      saveScreen();
+    }
+  };
+
+
+  useEffect(() => {
+    setTitleError(title.length < 3);
+  }, [title]);
 
   return (
     <div className='create_page_controller'>
@@ -26,7 +42,7 @@ export default observer(function ControllerIFrame({ store, human }) {
       {store.isEditScreen ?
         <>
           {store.newScreen ?
-            <BaseButton handlerClick={saveScreen}>Save Screen</BaseButton> :
+            <BaseButton handlerClick={saveScreenEndValidation}>Save Screen</BaseButton> :
             <BaseButton handlerClick={updateScreen}>Update Screen</BaseButton>
           }
 
@@ -50,9 +66,10 @@ export default observer(function ControllerIFrame({ store, human }) {
             onModeCreated={events.addAnnotation}
           >
             <InputLabel
-              label='title'
-              placeholder='title'
+              label='Title'
+              placeholder='Title'
               value={title}
+              error={titleError}
               active={title?.length > 2}
               handlerChange={setTitle}
               labelWidth={'100px'}
@@ -68,6 +85,7 @@ export default observer(function ControllerIFrame({ store, human }) {
               className='create_page_controller_footer'
               onModeEdit={events.editAnnotation}
               human={human}
+              error={titleError}
               setTitle={setTitle}
               title={title}
               store={store} />

@@ -34,6 +34,11 @@ export default observer(function ViewerPage() {
     humanApi.updateNote(store.noteSelected);
   }, [store.noteSelected, humanApi]);
 
+  useEffect(() => {
+    if(humanApi.human && humanApi.listActions?.length) {
+      humanApi.updateCamera();
+    }
+  }, [humanApi.listActions])
   const init = () => {
     setShowResetButton(true);
     humanApi.init();
@@ -43,7 +48,6 @@ export default observer(function ViewerPage() {
   const reset = () => {
     humanApi.reset();
   };
-
   const nextNote = () => store.nextNote();
   const prevNote = () => store.prevNote();
   return (

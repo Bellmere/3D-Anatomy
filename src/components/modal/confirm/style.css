@@ -53,6 +53,7 @@
   font-size: 18px;
   transition: 0.4s;
 }
+
 .confirm_modal .confirm_modal__footer button:only-child {
   width: 100%;
 }
@@ -67,4 +68,8 @@
 
 .confirm_modal .confirm_modal__footer button:last-child:hover {
   opacity: 0.6;
+}
+.confirm_modal .confirm_modal__footer button:disabled {
+  background-color: #d3d3d3;
+  pointer-events: none;
 }
