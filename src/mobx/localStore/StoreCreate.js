@@ -271,7 +271,7 @@ export default class StoreCreate {
       note.content = note.content.replace(spanClass, '');
       note.content = note.content.replace(span, '');
       note.actions.forEach(({ title, id }) => {
-        const reg = new RegExp(title, 'gi');
+        const reg = new RegExp(`"${title}"`, 'gi');
         note.content = note.content.replace(reg, `<span class='action-item' data-key="${id}">${title}</span>`);
       });
 
