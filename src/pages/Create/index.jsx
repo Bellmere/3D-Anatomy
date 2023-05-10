@@ -42,6 +42,11 @@ export default observer(function CreatePage({ initState = null }) {
   if(!store.data.title || !store.data.region) {
     return <NotesModal store={store} />
   }
+  let content = store.selectedNote?.content;
+  const spanClass = new RegExp('<span class=\'action-item\' [^>]*>', 'gi');
+  const span = new RegExp('</span>', 'gi');
+  content = content.replace(spanClass, '%');
+  content = content.replace(span, '%');
   return (
     <div className='container create_page__container'>
       <TopController store={store} human={human}>
@@ -64,7 +69,7 @@ export default observer(function CreatePage({ initState = null }) {
                 active={store.selectedNote?.title?.length > 2}
                 handlerChange={setTitleNote}
               />
-              <ReactQuill theme='snow' value={store.selectedNote.content} onChange={setContentNote} />
+              <ReactQuill theme='snow' value={content} onChange={setContentNote} />
             </>
             : null}
         </div>

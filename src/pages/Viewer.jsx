@@ -50,6 +50,9 @@ export default observer(function ViewerPage() {
   };
   const nextNote = () => store.nextNote();
   const prevNote = () => store.prevNote();
+
+  const symbolReplace = new RegExp('%', 'gi');
+  const content = store.noteSelected?.content?.replace(symbolReplace, '');
   return (
     <div className='container'>
       <HeaderPageView
@@ -77,7 +80,7 @@ export default observer(function ViewerPage() {
                 />
               </div>
               : null}
-            <Typography content={store.noteSelected?.content} humanApi={humanApi} />
+            <Typography content={content} humanApi={humanApi} />
           </div>
         </div>
         :

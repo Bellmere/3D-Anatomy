@@ -266,12 +266,12 @@ export default class StoreCreate {
   async saveNotes(docId, notes, batch) {
     let order = 0;
     for (const note of notes) {
-      const spanClass = new RegExp('<span class="action-item">', 'gi');
+      const spanClass = new RegExp('<span class="action-item"[^>]*>', 'gi');
       const span = new RegExp('</span>', 'gi');
       note.content = note.content.replace(spanClass, '');
       note.content = note.content.replace(span, '');
       note.actions.forEach(({ title, id }) => {
-        const reg = new RegExp(`"${title}"`, 'gi');
+        const reg = new RegExp(`%${title}%`, 'gi');
         note.content = note.content.replace(reg, `<span class='action-item' data-key="${id}">${title}</span>`);
       });
 
