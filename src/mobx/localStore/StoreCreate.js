@@ -220,6 +220,7 @@ export default class StoreCreate {
       return await this.addDocFirebase();
     } else {
       await this.updateDocFirebase();
+      return this.data.id;
     }
 
   }
