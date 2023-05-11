@@ -1,26 +1,27 @@
 .auth__nav--wrap {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .auth__nav__link {
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px 18px;
-    font-family: inherit;
-    font-style: normal;
-    font-size: 16px;
-    line-height: 1.2;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 7px;
-    cursor: pointer;
-    transition: background 300ms linear;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #fff;
+  background: #2d72dc;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 300ms linear, color 300ms linear;
 }
 .auth__nav__link.active {
-    color: #3f51b5;
-    background: #fff;
+  color: #fff;
+  background: #2d72dc;
 }
 .auth__nav__link:hover {
-    background: #3f51b5;
+  background: #4381e0;
+  color: #fff;
 }
