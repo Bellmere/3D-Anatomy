@@ -44,7 +44,6 @@ export default observer(function CreatePage({ initState = null }) {
   };
   useEffect(() => {
     if (initState !== null) {
-      console.log('11111111');
       store.initState(initState);
     }
   }, [initState, store]);
@@ -59,9 +58,6 @@ export default observer(function CreatePage({ initState = null }) {
   const setContentNote = text => {
     store.selectedNote.setContent(text);
   };
-
-  console.log(buttonDisabled, 'buttonDisabled');
-
   const setTitleNote = value => store.selectedNote.setTitle(value);
 
   const addFormat = () => {
@@ -107,7 +103,6 @@ export default observer(function CreatePage({ initState = null }) {
                     if (range.length > 0) {
                         setButtonDisabled(false);
                       if (reactQuillRef.getEditor().getFormat().action) {
-                        console.log(range, reactQuillRef.getEditor().getFormat().action);
                           setStateRange(range);
                       }
                     } else {
@@ -148,7 +143,6 @@ class ActionBlot extends Inline {
 
   static create(value) {
     let node = super.create();
-    console.log(value);
     node.setAttribute('data-key', value.key);
     node.classList.add('action-item');
     return node;
