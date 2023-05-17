@@ -1,4 +1,7 @@
-import './style.css'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+
+
+import './style.css';
 
 const paramsIframe = [
   'ui-info=false',
@@ -10,23 +13,32 @@ const paramsIframe = [
   'ui-reset=false',
   'dk=' + process.env.REACT_APP_BIO_PUBLIC_KEY,
 ];
-export default function IFrameHuman({ scene, init = () => {}, className = '', children }) {
-  const idModel = scene?.length > 10 ? `m=${scene}.json` : `be=${scene}`
+export default function IFrameHuman({scene, init = () => {}, className = '', children,}) {
+  const handle = useFullScreenHandle();
+  const idModel = scene?.length > 10 ? `m=${scene}.json` : `be=${scene}`;
+
+  const toggleFullScreen = () => {
+    if(handle.active) handle.exit();
+    else  handle.enter();
+  }
   return (
-    <div style={{position: 'relative', height: '100%', width: '100%'}}>
-      <div style={{position: 'absolute', right: '20px', top: '20px'}}>
-        {children}
+    <FullScreen handle={handle}>
+      <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+        <div style={{ position: 'absolute', right: '20px', top: '20px' }}>
+          {handle?.active ? null : children}
+        </div>
+        <button onClick={toggleFullScreen}>full screen</button>
+        <iframe
+          id='myWidget'
+          title='myWidget'
+          onLoad={init}
+          className={`${className} iframe-human`}
+          src={`https://human.biodigital.com/widget/?${paramsIframe.join('&')}&${idModel}`}
+          width='100%'
+          height='100%'
+        >
+        </iframe>
       </div>
-      <iframe
-        id='myWidget'
-        title="myWidget"
-        onLoad={init}
-        className={`${className} iframe-human`}
-        src={`https://human.biodigital.com/widget/?${paramsIframe.join('&')}&${idModel}`}
-        width='100%'
-        height="100%"
-      >
-      </iframe>
-    </div>
+    </FullScreen>
   );
 }

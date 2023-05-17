@@ -45,6 +45,11 @@
   display: flex;
   flex-direction: column;
 }
-.create_page_editor > div {
-  flex-grow: 1;
+.create_page_editor .quill {
+  display: flex;
+  flex-direction: column;
+}
+.quill .action-item {
+  cursor: pointer;
+  color: #3f51b5;
 }

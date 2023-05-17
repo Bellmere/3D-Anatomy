@@ -15,7 +15,8 @@ export default function useController(store, human) {
   const saveScreen = () => {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
-        store.selectedNote.addNewAnnotation(capture, camera, objectsShown.current, title);
+        const id = store.getActionId;
+        store.selectedNote.addNewAnnotation(capture, camera, objectsShown.current, title, id);
         setEvents({ ...EVENTS });
         objectsShown.current = {};
         store.offNewScreen();
@@ -26,7 +27,8 @@ export default function useController(store, human) {
   const updateScreen = () => {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
-        store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title);
+        const id = store.getActionId;
+        store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title, id);
         setEvents({ ...EVENTS });
         objectsShown.current = {};
         store.offEditMode();

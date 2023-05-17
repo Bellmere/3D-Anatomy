@@ -36,8 +36,6 @@ export default class HumanApi {
   updateCamera() {
     const action = this.listActions[this.currentAction];
     if(action === undefined || action === this.prevSelectedAction) return;
-    console.log(action)
-
     this.prevSelectedAction = action;
     this._updateCamera(this.human, action);
   }

@@ -8,8 +8,6 @@ import InputLabel from '../../fields/inputLabel';
 
 
 export default observer(function ControllerIFrame({ store, human }) {
-
-
   const {
     events,
     saveScreen,
@@ -38,7 +36,6 @@ export default observer(function ControllerIFrame({ store, human }) {
 
   return (
     <div className='create_page_controller'>
-      {store.isEditScreen}
       {store.isEditScreen ?
         <>
           {store.newScreen ?
