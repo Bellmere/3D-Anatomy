@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useController from '../../../hooks/useControlle';
 import AddNewAnnotation from './add-new-annotation';

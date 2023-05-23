@@ -6,6 +6,7 @@ export default class HumanController {
     this.objectsShown = [];
     this.objectsSelected = [];
     this.labelsPicked = [];
+    this.prevSelectedAction = null;
     Object.assign(this, HumanUpdateScreen);
     this.addEvent();
   }
@@ -32,7 +33,8 @@ export default class HumanController {
 
   }
   updateCamera(action) {
-    this._updateCamera(this.api, action);
+    this._updateCamera(this.api, action, this.prevSelectedAction);
+    this.prevSelectedAction = action;
   }
   subscribe(callback, type) {
     if(!this[type]) throw Error('not found type event')
