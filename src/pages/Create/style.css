@@ -106,7 +106,31 @@
   .create_page__content {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: flex-end;
   }
+  .create_page__content .fullscreen {
+      height: 100%;
+  }
+  .create_page__container .base_button__white {
+    margin-left: 6px;
+  }
+  .create_page_editor {
+    margin: 0;
+  }
+  .create_page__container .base_button__white,
+  .create_page__container .button_delete{
+    font-size: 0;
+    width: 46px;
+    padding: 0;
+    flex-shrink: 0;
+    gap: 0;
+  }
+  .create_page__container .base_button__white svg,
+  .create_page__container .button_delete svg {
+    margin-left: 0;
+  }
+
+
 
 }
 

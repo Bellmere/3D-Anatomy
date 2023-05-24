@@ -73,3 +73,8 @@
   background-color: #d3d3d3;
   pointer-events: none;
 }
+@media (max-width: 1199px) {
+  .confirm_modal .confirm_modal__main {
+    margin: 15px;
+  }
+}

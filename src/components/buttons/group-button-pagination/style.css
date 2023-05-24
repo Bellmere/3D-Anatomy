@@ -18,3 +18,8 @@
 .group-button-pagination .group-button-pagination__label svg {
   flex-shrink: 0;
 }
+@media (max-width: 767px) {
+  .group-button-pagination .group-button-pagination__label {
+    padding: 11px 20px;
+  }
+}
