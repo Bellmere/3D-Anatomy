@@ -1,7 +1,9 @@
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
-
 import './style.css';
+
+import { ReactComponent as HideFullScreen } from '../../../icons/full-screen-exit.svg';
+import { ReactComponent as OpenFullScreen } from '../../../icons/full-screen-open.svg';
 
 const paramsIframe = [
   'ui-info=false',
@@ -27,7 +29,7 @@ export default function IFrameHuman({scene, init = () => {}, className = '', chi
         <div style={{ position: 'absolute', right: '20px', top: '20px' }}>
           {handle?.active ? null : children}
         </div>
-        <button onClick={toggleFullScreen}>full screen</button>
+        <button className={handle.active ? 'full-screen-btn base_button' :  'not-full-screen-btn base_button'} onClick={toggleFullScreen}> {handle.active ? <HideFullScreen/> : <OpenFullScreen /> }</button>
         <iframe
           id='myWidget'
           title='myWidget'

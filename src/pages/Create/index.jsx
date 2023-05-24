@@ -121,10 +121,10 @@ export default observer(function CreatePage({ initState = null }) {
               >
 
               </ReactQuill>
-              <div>
-                <button disabled={buttonDisabled || !!stateRange} onClick={addFormat}>Add
+              <div className="flex-wrap">
+                <button className="base_button" disabled={buttonDisabled || !!stateRange} onClick={addFormat}>Add
                 </button>
-                <button onClick={removeFormat} disabled={stateRange === null}>Remove
+                <button className="base_button" onClick={removeFormat} disabled={stateRange === null}>Remove
                 </button>
               </div>
 

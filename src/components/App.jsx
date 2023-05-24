@@ -28,7 +28,8 @@ export const App = observer(() => {
     <>
       <HelmetProvider>
         <Helmet>
-          <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>
+         {/* <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>*/}
+          <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
           <script src='https://developer.biodigital.com/builds/api/2/human-api.min.js'></script>
           <title>Anatomy App</title>
         </Helmet>

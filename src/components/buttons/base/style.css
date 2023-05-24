@@ -7,7 +7,7 @@
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #fff;
-  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+  font-family: -apple-system, system-ui, "Segoe UI", Quicksand, "Helvetica Neue", Ubuntu, sans-serif;
   font-size: 100%;
   height: 44px;
   line-height: 1.15;
@@ -26,7 +26,13 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+}
+.base_button.full-screen-btn {
+  position: absolute;
+  top: 20px;
+  padding: 0 12px;
+  left: 20px;
 }
 .base_button__remove {
   background-color: #ff0000;
@@ -39,6 +45,11 @@
   border-radius: 7px;
   color: #353535;
   border: solid 1px #42A4CB;
+  white-space: nowrap;
+}
+.base_button__white svg {
+  margin-left: 5px;
+  flex-shrink: 0;
 }
 .base_button:disabled {
   cursor: default;
@@ -49,8 +60,51 @@
 .base_button:hover {
   opacity: 0.9;
 }
+.button_delete {
+  position: relative;
+  backface-visibility: hidden;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  font-family: -apple-system, system-ui, "Segoe UI", Quicksand, "Helvetica Neue", Ubuntu, sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s, box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  color: #fff;
+  border: solid 1px #42A4CB;
+  background: #EC3718 !important;
+  white-space: nowrap;
 
+}
+.button_delete svg {
+  flex-shrink: 0;
+}
+.button_delete svg path {
+    fill: #fff;
+}
 .base_button:focus {
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
+
+.not-full-screen-btn {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 0 12px;
+}
+
 

@@ -94,7 +94,7 @@ export default observer(function ViewerPage() {
               null
             }
             <Typography content={content} humanApi={humanApi}>
-              <button onClick={addNewWindow}>New Window</button>
+              <button className="base_button" onClick={addNewWindow}>New Window</button>
             </Typography>
           </div>
         </div>

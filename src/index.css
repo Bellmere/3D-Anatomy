@@ -8,7 +8,8 @@
 body {
   width: 100%;
   margin: 0;
-  font-family: Roboto;
+  font-family: Quicksand;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

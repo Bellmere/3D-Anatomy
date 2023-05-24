@@ -6,6 +6,7 @@
   cursor: pointer;
   border: none;
   background-color: inherit;
+  flex-shrink: 0;
 }
 .arrow_button svg {
   width: 100%;

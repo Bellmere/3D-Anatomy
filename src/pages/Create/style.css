@@ -1,12 +1,12 @@
 .create_page__title {
   font-size: 24px;
-  font-family: "Roboto";
+  font-family: "Quicksand";
   padding: 5px 0;
   font-weight: bold;
   margin-right: 20px;
 }
 .create_page_controller {
-  background: rgba(66, 164, 203, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 10px;
   color: #ffffff;
@@ -24,6 +24,9 @@
   display: flex;
   flex-direction: column;
 }
+.wrap-select {
+  min-width: 200px;
+}
 .create_page__content {
   display: grid;
   grid-template-columns: 70% auto;
@@ -32,8 +35,14 @@
 .create_page_top_controller {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 10px;
+  padding: 20px 0;
+}
+.create_page_editor .flex-wrap {
+  display: flex;
+}
+.create_page_editor .flex-wrap button {
+  margin: 10px 10px 10px 0;
 }
 .create_page_top_controller_button {
   margin-left: auto;
@@ -44,12 +53,60 @@
 .create_page_editor {
   display: flex;
   flex-direction: column;
+  margin: 0 0 10px 10px;
 }
 .create_page_editor .quill {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
+}
+.create_page_editor .ql-container {
+  font-family: inherit;
+}
+.create_page_editor .ql-container p strong {
+  font-weight: 700;
 }
 .quill .action-item {
   cursor: pointer;
   color: #3f51b5;
 }
+.create_page_editor .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  min-width: 150px;
+}
+.create_page_editor .ql-toolbar.ql-snow .ql-formats {
+  margin-right: 0;
+}
+@media (max-width: 1199px) {
+  .create_page_top_controller {
+      flex-wrap: wrap;
+  }
+  .create_page_top_controller_button {
+      width: 100%;
+  }
+  .wrap-select{
+    flex-grow: 1;
+    position: relative;
+    z-index: 10;
+  }
+  .create_page_top_controller_button button,
+  .group-button-pagination__label {
+    justify-content: center;
+    flex-grow: 1;
+  }
+}
+
+@media (max-width: 767px) {
+    .create_page__title {
+       width: 100%;
+    }
+    .wrap-select {
+      position: relative;
+      z-index: 10;
+    }
+  .create_page__content {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+}
+

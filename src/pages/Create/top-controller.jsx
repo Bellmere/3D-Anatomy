@@ -29,7 +29,9 @@ export default observer(function TopController({ store, human, children }) {
   return (
     <div className='create_page_top_controller'>
       <h2 className='create_page__title'>Create page</h2>
-      <ListModels changeUri={changeScene} selected={store.selectedNote.scene} isOpenConfirm={!!store?.selectedNote?.actions.length}/>
+      <div className="wrap-select">
+        <ListModels changeUri={changeScene} selected={store.selectedNote.scene} isOpenConfirm={!!store?.selectedNote?.actions.length}/>
+      </div>
       {options?.length ?
         <>
           {isOpened ?
@@ -37,6 +39,7 @@ export default observer(function TopController({ store, human, children }) {
               Are you sure you want to delete this screen?
             </ModalConfirm>
             : null}
+          <div className="wrap-select">
           <Select
             value={{ value: store.selectedAction.id, label: store.selectedAction.title }}
             options={options}
@@ -45,6 +48,7 @@ export default observer(function TopController({ store, human, children }) {
               human.updateCamera(store.selectedAction);
             }}
           ></Select>
+          </div>
           {store.selectedAction.id ?
             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
               <BasketSvg onClick={() => setOpened(true)} />

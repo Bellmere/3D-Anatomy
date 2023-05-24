@@ -2,14 +2,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 4px;
 }
 .group-button-pagination .group-button-pagination__label {
   font-size: 14px;
-  padding: 14px 33px;
+  padding: 11px 33px;
+  max-height: 44px;
   border-radius: 7px;
   border: solid #D7D7D7 1px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #353535;
   font-weight: 500;
+  white-space: nowrap;
+}
+.group-button-pagination .group-button-pagination__label svg {
+  flex-shrink: 0;
 }

@@ -22,7 +22,7 @@
   background-color: #ffffff;
   border-radius: 10px;
   position: relative;
-  font-family: "Roboto";
+  font-family: "Quicksand";
   font-weight: bold;
 }
 .confirm_modal .confirm_modal__content {
@@ -48,7 +48,7 @@
   outline: none;
   width: 50%;
   border: none;
-  font-family: "Roboto";
+  font-family: "Quicksand";
   font-weight: bold;
   font-size: 18px;
   transition: 0.4s;
