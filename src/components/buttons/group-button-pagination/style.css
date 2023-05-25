@@ -22,4 +22,7 @@
   .group-button-pagination .group-button-pagination__label {
     padding: 11px 20px;
   }
+  .group-button-pagination {
+    width: 100%;
+  }
 }

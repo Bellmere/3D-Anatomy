@@ -95,3 +95,19 @@ input:-webkit-autofill {
   gap: 5px;
   cursor: pointer;
 }
+@media(max-width: 767px) {
+  .container-iframe {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  .container-iframe .fullscreen {
+     height: 100%;
+  }
+  .header-page-typography {
+    height: 50%;
+  }
+  .container-iframe {
+    height: calc(100vh - 295px);
+  }
+}

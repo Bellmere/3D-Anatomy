@@ -19,3 +19,17 @@
 .header-page__select > div {
   min-height: 100%;
 }
+
+@media(max-width: 767px) {
+  .header-page {
+    flex-wrap: wrap;
+    height: auto;
+  }
+  .header-page__title {
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .header-page__select {
+    width: 100%;
+  }
+}
