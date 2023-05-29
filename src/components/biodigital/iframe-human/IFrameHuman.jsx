@@ -6,14 +6,13 @@ import { ReactComponent as HideFullScreen } from '../../../icons/full-screen-exi
 import { ReactComponent as OpenFullScreen } from '../../../icons/full-screen-open.svg';
 
 const paramsIframe = [
-  'ui-info=false',
-  'ui-fullscreen=true',
-  'ui-tools=true',
-  'ui-annotations=true',
-  'ui-object-tree=true',
+  'ui-all=false',
+  'ui-fullscreen=false',
   'ui-loader=circle',
+  'ui-label-list=false',
+  'ui-anatomy-labels=false',
   'ui-reset=false',
-  'dk=' + process.env.REACT_APP_BIO_PUBLIC_KEY,
+  'ui-nav=true',
 ];
 export default function IFrameHuman({scene, init = () => {}, className = '', children,}) {
   const handle = useFullScreenHandle();
@@ -22,6 +21,14 @@ export default function IFrameHuman({scene, init = () => {}, className = '', chi
   const toggleFullScreen = () => {
     if(handle.active) handle.exit();
     else  handle.enter();
+  }
+
+  let urlScene = ''
+
+  if(scene.includes('https://') || scene.includes('http://')) {
+    urlScene = `${scene}&${paramsIframe.join('&')}`;
+  } else {
+    urlScene = `https://human.biodigital.com/widget/?dk=${process.env.REACT_APP_BIO_PUBLIC_KEY}&${paramsIframe.join('&')}&${idModel}`
   }
   return (
     <FullScreen handle={handle}>
@@ -35,7 +42,7 @@ export default function IFrameHuman({scene, init = () => {}, className = '', chi
           title='myWidget'
           onLoad={init}
           className={`${className} iframe-human`}
-          src={`https://human.biodigital.com/widget/?${paramsIframe.join('&')}&${idModel}`}
+          src={urlScene}
           width='100%'
           height='100%'
         >

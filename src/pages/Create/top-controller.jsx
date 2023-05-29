@@ -16,7 +16,7 @@ export default observer(function TopController({ store, human, children }) {
     if (store.selectedNote.actions[0]?.id) {
       store.selectedNote.setSelectedAction(store.selectedNote.actions[0]?.id);
     }
-    human.api.send('scene.reset');
+    //human.api.send('scene.reset');
     if(store.selectedNote.actions?.length) {
       human.updateCamera(store.selectedAction);
     }

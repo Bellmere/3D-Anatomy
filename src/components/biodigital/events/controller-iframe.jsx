@@ -5,6 +5,8 @@ import AddNewAnnotation from './add-new-annotation';
 import EditAnnotation from './edit-annotation';
 import BaseButton from '../../buttons/base';
 import InputLabel from '../../fields/inputLabel';
+import Switch from '../../fields/switch';
+import { SketchPicker } from 'react-color';
 
 
 export default observer(function ControllerIFrame({ store, human }) {
@@ -18,10 +20,25 @@ export default observer(function ControllerIFrame({ store, human }) {
     updateScreen,
     title,
     setTitle,
+    enablePickColor,
+    disablePickColor,
   } = useController(store, human);
 
   const [titleError, setTitleError] = useState(false);
 
+  const [colors, setColors] = useState({ rgb: { r: 61, g: 55, b: 92, a: 1 } });
+  const [selectElement, setSelectElement] = useState(null);
+
+  useEffect(() => {
+    disablePickColor();
+  }, [store.selectedNote?.scene])
+  useEffect(() => {
+    const deselect = val => {
+      setSelectElement(val);
+    };
+    human.subscribe(deselect, 'selectedElement');
+    return () => human.unsubscribe(deselect, 'selectedElement');
+  });
 
   const saveScreenEndValidation = () => {
     if (!titleError) {
@@ -34,6 +51,10 @@ export default observer(function ControllerIFrame({ store, human }) {
     setTitleError(title.length < 3);
   }, [title]);
 
+  const togglePickColor = () => {
+    if (events.enablePickColor) disablePickColor();
+    else enablePickColor();
+  };
   return (
     <div className='create_page_controller'>
       {store.isEditScreen ?
@@ -72,6 +93,14 @@ export default observer(function ControllerIFrame({ store, human }) {
               labelWidth={'100px'}
             />
           </AddNewAnnotation>
+          <Switch
+            checked={events.enablePickColor}
+            onSwitch={togglePickColor}
+          >
+            <div style={{ display: 'flex', gap: '10px' }}>
+              Pick color object selected
+            </div>
+          </Switch>
         </div>
         : null}
 
@@ -86,10 +115,32 @@ export default observer(function ControllerIFrame({ store, human }) {
               setTitle={setTitle}
               title={title}
               store={store} />
+            <Switch
+              onSwitch={togglePickColor}
+            >
+              <div style={{ display: 'flex', gap: '10px' }}>
+                Pick color object selected
+              </div>
+            </Switch>
           </div>
           :
           null
       }
+      {events.enablePickColor ?
+        <>
+          <SketchPicker
+            color={colors}
+            onChange={color => {
+              setColors(color);
+              human.saveColor(color.rgb);
+            }}
+          />
+          {selectElement ? <button onClick={() => human.deselectElementColor()}>Deselect</button> : null }
+          {selectElement ?
+            <button onClick={() => human.highlightSelectedElement()}>Show Selected Element</button> : null}
+          {selectElement ? <button onClick={() => human.removeColor()}>reset color</button> : null}
+        </>
+        : null}
     </div>
   );
 });

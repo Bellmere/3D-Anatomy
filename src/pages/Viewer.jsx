@@ -60,6 +60,7 @@ export default observer(function ViewerPage() {
 
   const symbolReplace = new RegExp('%', 'gi');
   const content = store.noteSelected?.content?.replace(symbolReplace, '');
+  console.log(store);
   return (
     <div className='container'>
       <HeaderPageView

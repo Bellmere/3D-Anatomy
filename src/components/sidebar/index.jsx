@@ -1,6 +1,6 @@
 import { Sidebar, Menu, MenuItem, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { NavLink } from 'react-router-dom';
-import { ALLNOTES, ADD_MODEL, CREATE_MODEL } from '../../constans/routes/routes';
+import { ALLNOTES, CREATE_MODEL } from '../../constans/routes/routes';
 import { useLocation } from 'react-router-dom';
 import './style.css';
 
@@ -40,9 +40,6 @@ export default function SideBar() {
               </MenuItem>
             ))}
           </SubMenu>
-          <MenuItem component='div'>
-            <NavLink to={ADD_MODEL.path}>Add New Model</NavLink>
-          </MenuItem>
         </Menu>
       </Sidebar>
     </div>

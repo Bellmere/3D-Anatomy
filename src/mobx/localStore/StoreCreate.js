@@ -70,28 +70,27 @@ class Notes {
   }
 
 
-  updateAnnotation(capture, camera, objectsShown, title, id) {
+  updateAnnotation(capture, camera, objectsShown, title, id, colors) {
 
     const actionData = {
       objectsShown,
       objectsSelected: this.getObjectSelected(capture),
     };
-    this.selectedAction.update({ camera, labels: capture.labels, ...actionData, title, id });
+    this.selectedAction.update({ camera, labels: capture.labels, ...actionData, title, id, colors });
   }
 
-  addNewAnnotation(capture, camera, objectsShown, title, id) {
+  addNewAnnotation(capture, camera, objectsShown, title, id, colors) {
     const actionData = {
       objectsShown,
       objectsSelected: this.getObjectSelected(capture),
     };
 
-    this.actions.push(new Action({ camera, labels: capture.labels, ...actionData, title, id }));
+    this.actions.push(new Action({ camera, labels: capture.labels, ...actionData, title, id, colors }));
     if (this.actions.length) {
       this.selectedAction = this.actions[this.actions.length - 1];
     } else {
       this.selectedAction = null;
     }
-    console.log(this.selectedAction);
   }
 }
 
@@ -299,6 +298,7 @@ export default class StoreCreate {
       batch.set(refAction, {
         order,
         id: action.id,
+        colors: action.colors,
         camera: action.camera,
         labels: action.labels,
         title: action.title,

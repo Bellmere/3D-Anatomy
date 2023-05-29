@@ -54,7 +54,6 @@ export default observer(function CreatePage({ initState = null }) {
     }
   }, [human]);
 
-
   const setContentNote = text => {
     store.selectedNote.setContent(text);
   };
@@ -62,6 +61,11 @@ export default observer(function CreatePage({ initState = null }) {
 
   const addFormat = () => {
     reactQuillRef.getEditor().format('action', { key: store.getActionId ? store.getActionId : store.selectedAction?.id });
+    const range = reactQuillRef.getEditor().selection.lastRange;
+    reactQuillRef.getEditor().insertText(range.index + range.length, " ");
+    reactQuillRef.getEditor().removeFormat(range.index + range.length, 1);
+    reactQuillRef.getEditor().setSelection(range.index + range.length + 1, 0);
+
     setStateRange(null);
     setButtonDisabled(true)
   }
@@ -70,7 +74,7 @@ export default observer(function CreatePage({ initState = null }) {
     reactQuillRef.getEditor().removeFormat(stateRange.index, stateRange.length);
     setStateRange(null);
   }
-
+  console.log(stateRange);
   if (!store.data.title || !store.data.region) {
     return <NotesModal store={store} />;
   }
@@ -102,9 +106,9 @@ export default observer(function CreatePage({ initState = null }) {
                   if (range) {
                     if (range.length > 0) {
                         setButtonDisabled(false);
-                      if (reactQuillRef.getEditor().getFormat().action) {
+                        if(reactQuillRef.getEditor().getFormat().action) {
                           setStateRange(range);
-                      }
+                        }
                     } else {
                       setButtonDisabled(true);
                       setStateRange(null);
@@ -145,6 +149,7 @@ class ActionBlot extends Inline {
     let node = super.create();
     node.setAttribute('data-key', value.key);
     node.classList.add('action-item');
+
     return node;
   }
 

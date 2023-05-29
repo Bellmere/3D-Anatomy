@@ -28,7 +28,6 @@ export const LoginForm = observer(() => {
     try {
       setLoading(true);
       const res = await authUser.logIn(email, password);
-      console.log(res);
       if (!res.success) throw new Error(res.errorCode);
     } catch (error) {
       toast.error(ErrorCode[error.message]);

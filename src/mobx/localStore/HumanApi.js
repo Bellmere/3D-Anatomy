@@ -14,7 +14,9 @@ export default class HumanApi {
   init() {
     this.human = new window.HumanAPI('myWidget');
   }
-
+  get api () {
+    return this.human;
+  }
   updateNote(note, current = 0) {
     this.setPrevAction();
     this.currentAction = current;
