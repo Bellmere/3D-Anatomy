@@ -14,7 +14,7 @@ const paramsIframe = [
   'ui-reset=false',
   'ui-nav=true',
 ];
-export default function IFrameHuman({scene, init = () => {}, className = '', children,}) {
+export default function IFrameHuman({scene = '', init = () => {}, className = '', children,}) {
   const handle = useFullScreenHandle();
   const idModel = scene?.length > 10 ? `m=${scene}.json` : `be=${scene}`;
 
