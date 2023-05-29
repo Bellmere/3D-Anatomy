@@ -21,7 +21,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #42A4CB;
+  background-color: #ACABAC;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -54,7 +54,7 @@
   opacity: 1;
 }
 .switch_input + .slider:before {
-  background-color: #fb3b1e;
+  background-color: #706F71;
 }
 /* Rounded sliders */
 .slider.round {

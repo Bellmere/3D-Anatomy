@@ -77,6 +77,13 @@
 .create_page_editor .ql-toolbar.ql-snow .ql-formats {
   margin-right: 0;
 }
+
+.create_page_editor .form-group span {
+    color: #42A4CB;
+    background: #E4EDF5;
+    border-color: #42A4CB;
+    opacity: 1;
+}
 @media (max-width: 1199px) {
   .create_page_top_controller {
       flex-wrap: wrap;

@@ -77,7 +77,7 @@ export default observer(function NoteController({ store, human }) {
       </BaseButton>
 
       <button className='button_delete' onClick={() => setOpened(state => !state)}> Delete Note <BasketSvg /></button>
-      <BaseButton handlerClick={saveNotes}>Save</BaseButton>
+      <BaseButton className="green" handlerClick={saveNotes}>Save</BaseButton>
 
     </div>
   );

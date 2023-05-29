@@ -38,7 +38,7 @@
   background-color: #ff0000;
 }
 .base_button__cancel {
-  background-color: #d3d3d3;
+  background-color: #ACABAC;
 }
 .base_button__white {
   background-color: #ffffff;
@@ -107,4 +107,17 @@
   padding: 0 12px;
 }
 
-
+.btn-deselect {
+  background: #d3d3d3;
+  color: #fff;
+}
+.btn-reset-color {
+  background: #fb3b1e;
+}
+.base_button.green {
+    background: #82B45D;
+}
+.sketch-picker  {
+  width: 100% !important;
+  max-width: 270px;
+}
