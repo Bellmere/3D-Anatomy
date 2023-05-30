@@ -43,7 +43,7 @@
   display: flex;
 }
 .create_page_editor .flex-wrap button {
-  margin: 10px 10px 10px 0;
+  margin: 10px 10px 0 0;
 }
 .create_page_top_controller_button {
   margin-left: auto;
@@ -54,12 +54,13 @@
 .create_page_editor {
   display: flex;
   flex-direction: column;
-  margin: 0 0 10px 10px;
+  margin: 0 0 0 10px;
 }
 .create_page_editor .quill {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  height: calc(100% + 30px);
 }
 .create_page_editor .ql-container {
   font-family: inherit;
@@ -106,6 +107,9 @@
 @media (max-width: 767px) {
   .create_page__title {
      width: 100%;
+  }
+  .create_page_editor .flex-wrap button {
+    margin-bottom: 10px;
   }
   .wrap-select {
     position: relative;

@@ -24,7 +24,7 @@
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all 0.2s, box-shadow 0.08s ease-in;
+  transition: all 0.3s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -52,6 +52,9 @@
   color: #353535;
   border: solid 1px #42a4cb;
   white-space: nowrap;
+}
+.base_button__white:hover {
+  color: #fff !important;
 }
 .base_button__white svg {
   margin-left: 5px;
@@ -83,7 +86,7 @@
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all 0.2s, box-shadow 0.08s ease-in;
+  transition: all 0.3s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -96,6 +99,7 @@
   border: solid 1px #42a4cb;
   background: #fb3b1e !important;
   white-space: nowrap;
+
 }
 .button_delete svg {
   flex-shrink: 0;
@@ -124,6 +128,10 @@
 }
 .base_button.green {
   background: #82b45d;
+}
+.base_button.green:hover,
+.button_delete:hover {
+    opacity: .7;
 }
 .sketch-picker {
   width: 100% !important;

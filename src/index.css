@@ -114,7 +114,7 @@ input:-webkit-autofill {
   border: none;
   gap: 5px;
   cursor: pointer;
-  transition: background 300ms linear;
+  /*transition: background 300ms linear;*/
 }
 .button_delete:hover {
   background: #4381e0;
@@ -127,16 +127,18 @@ input:-webkit-autofill {
   font-size: 16px;
 }
 .label__tag {
-  max-width: none;
   background: rgba(255, 255, 255, 0.7);
   padding: 5px;
   border-radius: 5px;
-  border: solid 1px rgba(0, 0, 0, 0.3);
+  border: solid 1px rgba(0,0,0,.3);
   width: max-content;
   font-family: Quicksand;
 }
 .view-page__logo {
   display: none !important;
+}
+.ql-editor {
+  max-height: calc(100vh - 350px);
 }
 @media (max-width: 767px) {
   .container-iframe {

@@ -39,8 +39,8 @@ export default function IFrameHuman({
   }
   return (
     <FullScreen handle={handle}>
-      <div style={{ position: 'relative', height: '100%', width: '100%' }}>
-        <div style={{ position: 'absolute', right: '20px', top: '20px' }}>
+      <div style={{ position: 'relative', height: '100%', width: '100%' ,  overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', right: '20px', top: '20px' , overflow: 'auto' , bottom: '15px' }}>
           {handle?.active ? null : children}
         </div>
         <button
