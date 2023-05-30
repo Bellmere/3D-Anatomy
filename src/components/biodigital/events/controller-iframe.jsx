@@ -135,10 +135,10 @@ export default observer(function ControllerIFrame({ store, human }) {
               human.saveColor(color.rgb);
             }}
           />
-          {selectElement || true ? <button className="btn-deselect base_button " onClick={() => human.deselectElementColor()}>Deselect</button> : null }
-          {selectElement || true ?
+          {selectElement ? <button className="btn-deselect base_button " onClick={() => human.deselectElementColor()}>Deselect</button> : null }
+          {selectElement  ?
             <button className="btn-show-selected-element base_button " onClick={() => human.highlightSelectedElement()}>Show Selected Element</button> : null}
-          {selectElement || true ? <button className="btn-reset-color base_button " onClick={() => human.removeColor()}>Reset Color</button> : null}
+          {selectElement  ? <button className="btn-reset-color base_button " onClick={() => human.removeColor()}>Reset Color</button> : null}
         </>
         : null}
     </div>
