@@ -23,7 +23,7 @@ export default function useModels() {
     return null;
   };
   const fetchModels = async () => {
-    fetch('http://127.0.0.1:5001/clinicalphysioanatomy/us-central1/getmodels')
+    fetch('https://getmodels-oayrtllsza-uc.a.run.app/')
       .then(e => e.json())
       .then(models => {
         setModels(models.map((item) => {

@@ -2,7 +2,7 @@ const { onRequest } = require('firebase-functions/v2/https');
 const request = require('request-promise');
 const utf8 = require('utf8');
 // Firestore under the path /messages
-exports.getmodels = onRequest(async (req, res) => {
+exports.getmodels = onRequest({ cors: true }, async (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
 
   let auth_str = 'ade1c97a330684304f79430b5049f4bb0a0da7c4:2e48cbad663179f94f80245cf290a6ca034084f3';
