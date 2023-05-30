@@ -4,6 +4,9 @@
   z-index: 9999;
   height: 100%;
   background-color: #ffffff;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .sidebar .sub-menu span {
@@ -14,7 +17,7 @@
   height: 100%;
 }
 .sidebar .sub-menu a.active {
-  color: #42A4CB;
+  color: #4381e0;
 }
 .sidebar .ps-menu-button a {
   display: flex;
@@ -27,29 +30,29 @@
 
 .sidebar .ps-menu-button a.active {
   text-decoration: underline;
-  color: #42A4CB;
+  color: #4381e0;
 }
 .sidebar .ps-menu-button a.active:hover,
 .sidebar .ps-menu-button a.active:hover {
   color: #ffffff;
 }
 .sidebar .ps-menu-button:hover {
-  background-color: rgba(66, 164, 203, 0.8)!important;
+  background-color: #2d72dc !important;
   color: #ffffff;
 }
 .sidebar .ps-menu-button:hover a {
   color: #ffffff;
 }
 .sidebar .ps-sidebar-container {
-  background-color:#ffffff;
+  background-color: #ffffff;
 }
 
 .sidebar .sidebar_bg {
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0, 0.5);
-  top:0;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
   left: -100%;
   opacity: 0;
   transition: opacity 0.3s;

@@ -14,21 +14,28 @@ const paramsIframe = [
   'ui-reset=false',
   'ui-nav=true',
 ];
-export default function IFrameHuman({scene = '', init = () => {}, className = '', children,}) {
+export default function IFrameHuman({
+  scene = '',
+  init = () => {},
+  className = '',
+  children,
+}) {
   const handle = useFullScreenHandle();
   const idModel = scene?.length > 10 ? `m=${scene}.json` : `be=${scene}`;
 
   const toggleFullScreen = () => {
-    if(handle.active) handle.exit();
-    else  handle.enter();
-  }
+    if (handle.active) handle.exit();
+    else handle.enter();
+  };
 
-  let urlScene = ''
+  let urlScene = '';
 
-  if(scene.includes('https://') || scene.includes('http://')) {
+  if (scene.includes('https://') || scene.includes('http://')) {
     urlScene = `${scene}&${paramsIframe.join('&')}`;
   } else {
-    urlScene = `https://human.biodigital.com/widget/?dk=${process.env.REACT_APP_BIO_PUBLIC_KEY}&${paramsIframe.join('&')}&${idModel}`
+    urlScene = `https://human.biodigital.com/widget/?dk=${
+      process.env.REACT_APP_BIO_PUBLIC_KEY
+    }&${paramsIframe.join('&')}&${idModel}`;
   }
   return (
     <FullScreen handle={handle}>
@@ -36,17 +43,26 @@ export default function IFrameHuman({scene = '', init = () => {}, className = ''
         <div style={{ position: 'absolute', right: '20px', top: '20px' }}>
           {handle?.active ? null : children}
         </div>
-        <button className={handle.active ? 'full-screen-btn base_button' :  'not-full-screen-btn base_button'} onClick={toggleFullScreen}> {handle.active ? <HideFullScreen/> : <OpenFullScreen /> }</button>
+        <button
+          className={
+            handle.active
+              ? 'full-screen-btn base_button'
+              : 'not-full-screen-btn base_button'
+          }
+          onClick={toggleFullScreen}
+        >
+          {' '}
+          {handle.active ? <HideFullScreen /> : <OpenFullScreen />}
+        </button>
         <iframe
-          id='myWidget'
-          title='myWidget'
+          id="myWidget"
+          title="myWidget"
           onLoad={init}
           className={`${className} iframe-human`}
           src={urlScene}
-          width='100%'
-          height='100%'
-        >
-        </iframe>
+          width="100%"
+          height="100%"
+        ></iframe>
       </div>
     </FullScreen>
   );

@@ -1,63 +1,61 @@
 .note__item {
-    margin: 10px;
-    padding: 7px;
-    color: rgba(0, 0, 0, 0.87);
-    background-color: #fff;
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
-      0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  }
-  .note__item--wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 16px;
-  }
-  .note__title {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-  }
-  .note__navigation {
-    display: flex;
-    flex-shrink: 0;
-  }
-  .note__btn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 4px;
-    cursor: pointer;
-    border: none;
-    border-radius: 50%;
-    background-color: transparent;
-    transition: background-color 300ms linear;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .note__link {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 4px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    text-decoration: none;
-    transition: background-color 300ms linear;
-  }
-  .note__btn:hover,
-  .note__btn:focus,
-  .note__link:hover,
-  .note__link:focus {
-    background-color: rgba(0, 0, 0, 0.08);
-  }
-  .note__icon {
-    fill: #3f51b5;
-    width: 24px;
-    height: 24px;
-  }
+  margin: 10px;
+  padding: 7px;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #fff;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.note__item--wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+.note__title {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+.note__navigation {
+  display: flex;
+  flex-shrink: 0;
+}
+.note__btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 4px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 300ms linear;
+  -webkit-tap-highlight-color: transparent;
+}
+.note__link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 4px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 300ms linear;
+}
+.note__btn:hover,
+.note__btn:focus,
+.note__link:hover,
+.note__link:focus {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.note__icon {
+  fill: #3f51b5;
+  width: 24px;
+  height: 24px;
+}

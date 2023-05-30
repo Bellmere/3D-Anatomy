@@ -52,7 +52,7 @@ export const LoginForm = observer(() => {
               isRequired
             />
           </div>
-          <BaseButton loading={loading}>Sing In</BaseButton>
+          <BaseButton loading={loading}>Sign In</BaseButton>
           <div className="singin__link--wrap">
             <Link className="singIn__link" to="/singup">
               Register
