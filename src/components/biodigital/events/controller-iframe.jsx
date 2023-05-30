@@ -76,7 +76,7 @@ export default observer(function ControllerIFrame({ store, human }) {
         </>
       }
       {store.newScreen ?
-        <div className='create_page_controller_footer'>
+        <div className='create_page_controller_footer first-block'>
           <AddNewAnnotation
             store={store}
             human={human}
@@ -135,10 +135,10 @@ export default observer(function ControllerIFrame({ store, human }) {
               human.saveColor(color.rgb);
             }}
           />
-          {selectElement ? <button onClick={() => human.deselectElementColor()}>Deselect</button> : null }
-          {selectElement ?
-            <button onClick={() => human.highlightSelectedElement()}>Show Selected Element</button> : null}
-          {selectElement ? <button onClick={() => human.removeColor()}>reset color</button> : null}
+          {selectElement || true ? <button className="btn-deselect base_button " onClick={() => human.deselectElementColor()}>Deselect</button> : null }
+          {selectElement || true ?
+            <button className="btn-show-selected-element base_button " onClick={() => human.highlightSelectedElement()}>Show Selected Element</button> : null}
+          {selectElement || true ? <button className="btn-reset-color base_button " onClick={() => human.removeColor()}>Reset Color</button> : null}
         </>
         : null}
     </div>
