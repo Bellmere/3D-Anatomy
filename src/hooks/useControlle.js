@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 const EVENTS = {
   addAnnotation: false,
   editAnnotation: false,
+  enablePickColor: false,
 };
 export default function useController(store, human) {
   const [events, setEvents] = useState({
@@ -12,11 +13,22 @@ export default function useController(store, human) {
 
   const objectsShown = useRef({  });
 
+  const enablePickColor = () => {
+    human.enablePickColor();
+    setEvents({...events, enablePickColor: true})
+  };
+  const disablePickColor = () => {
+    human.disablePickColor();
+    setEvents({...events, enablePickColor: false });
+  }
   const saveScreen = () => {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
-        store.selectedNote.addNewAnnotation(capture, camera, objectsShown.current, title);
+        const id = store.getActionId;
+        store.selectedNote.addNewAnnotation(capture, camera, objectsShown.current, title, id, human.getObjectsIdColor());
         setEvents({ ...EVENTS });
+        human.reset(store.selectedAction);
+        disablePickColor();
         objectsShown.current = {};
         store.offNewScreen();
         setTitle('');
@@ -26,8 +38,11 @@ export default function useController(store, human) {
   const updateScreen = () => {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
-        store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title);
+        const id = store.getActionId;
+        store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title, id, human.getObjectsIdColor());
         setEvents({ ...EVENTS });
+        human.reset(store.selectedAction);
+        disablePickColor();
         objectsShown.current = {};
         store.offEditMode();
         setTitle('');
@@ -37,12 +52,13 @@ export default function useController(store, human) {
 
 
 
-  const onModeAnnotation = value => setEvents({ ...EVENTS, addAnnotation: value });
+  const onModeAnnotation = value => setEvents({ ...EVENTS, addAnnotation: value, enablePickColor: events.enablePickColor  });
 
   const cancel = () => {
     store.offMode();
-    human.api.send('scene.reset');
+    //human.api.send('scene.reset');
     setEvents({ ...EVENTS });
+    disablePickColor();
     objectsShown.current = {};
     if(store.selectedNote?.selectedAction) {
       human.updateCamera(store.selectedNote.selectedAction);
@@ -53,15 +69,16 @@ export default function useController(store, human) {
 
   const addNewScreen = () => {
     store.onNewScreen();
-    human.api.send('scene.reset');
+    human.resetLabels();
+    human.resetSelected();
+    human.resetColor(store.selectedAction?.colors)
     objectsShown.current = {};
   }
 
   const editMode = () => {
-    human.api.send('scene.reset');
     store.onEditMode();
     human.updateCamera(store.selectedAction)
-    setEvents({ ...EVENTS, editAnnotation: true })
+    setEvents({ ...EVENTS, editAnnotation: true, enablePickColor: events.enablePickColor })
   }
 
 
@@ -98,6 +115,8 @@ export default function useController(store, human) {
     onModeAnnotation,
     updateScreen,
     editMode,
+    enablePickColor,
+    disablePickColor,
     events,
     title,
     setTitle

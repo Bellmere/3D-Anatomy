@@ -10,6 +10,7 @@ import Typography from '../components/typography';
 import IFrameHuman from '../components/biodigital/iframe-human/IFrameHuman';
 import GroupButtonPagination from '../components/buttons/group-button-pagination';
 import BaseButton from '../components/buttons/base';
+import NewWindow from 'react-new-window';
 
 const styleNotesController = {
   width: 'auto',
@@ -20,6 +21,7 @@ const styleNotesController = {
   boxShadow: '0px 1px 10px #00000010',
 };
 export default observer(function ViewerPage() {
+  const [isNewWindow, setIsNewWindow] = useState(false);
   const [store] = useState(new Viewer());
   const [humanApi] = useState(new HumanApi());
   const [showResetButton, setShowResetButton] = useState(false);
@@ -29,16 +31,21 @@ export default observer(function ViewerPage() {
     store.getSingleLearnById(id);
   }, [id, store]);
 
-
+  const addNewWindow = () => {
+    setIsNewWindow(false)
+    requestAnimationFrame(() => {
+      setIsNewWindow(true)
+    })
+  };
   useEffect(() => {
     humanApi.updateNote(store.noteSelected);
   }, [store.noteSelected, humanApi]);
 
   useEffect(() => {
-    if(humanApi.human && humanApi.listActions?.length) {
+    if (humanApi.human && humanApi.listActions?.length) {
       humanApi.updateCamera();
     }
-  }, [humanApi.listActions, humanApi])
+  }, [humanApi.listActions, humanApi]);
   const init = () => {
     setShowResetButton(true);
     humanApi.init();
@@ -50,6 +57,10 @@ export default observer(function ViewerPage() {
   };
   const nextNote = () => store.nextNote();
   const prevNote = () => store.prevNote();
+
+  const symbolReplace = new RegExp('%', 'gi');
+  const content = store.noteSelected?.content?.replace(symbolReplace, '');
+  console.log(store);
   return (
     <div className='container'>
       <HeaderPageView
@@ -77,7 +88,15 @@ export default observer(function ViewerPage() {
                 />
               </div>
               : null}
-            <Typography content={store.noteSelected?.content} humanApi={humanApi} />
+            {isNewWindow ?
+              <NewWindow closeOnUnmount={() => setIsNewWindow(false)}>
+                <Typography content={content} humanApi={humanApi} />
+              </NewWindow> :
+              null
+            }
+            <Typography content={content} humanApi={humanApi}>
+              <button className="base_button" onClick={addNewWindow}>New Window</button>
+            </Typography>
           </div>
         </div>
         :

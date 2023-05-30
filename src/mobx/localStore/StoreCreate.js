@@ -70,21 +70,22 @@ class Notes {
   }
 
 
-  updateAnnotation(capture, camera, objectsShown, title) {
+  updateAnnotation(capture, camera, objectsShown, title, id, colors) {
+
     const actionData = {
       objectsShown,
       objectsSelected: this.getObjectSelected(capture),
     };
-    this.selectedAction.update({ camera, labels: capture.labels, ...actionData, title });
+    this.selectedAction.update({ camera, labels: capture.labels, ...actionData, title, id, colors });
   }
 
-  addNewAnnotation(capture, camera, objectsShown, title) {
+  addNewAnnotation(capture, camera, objectsShown, title, id, colors) {
     const actionData = {
       objectsShown,
       objectsSelected: this.getObjectSelected(capture),
     };
 
-    this.actions.push(new Action({ camera, labels: capture.labels, ...actionData, title }));
+    this.actions.push(new Action({ camera, labels: capture.labels, ...actionData, title, id, colors }));
     if (this.actions.length) {
       this.selectedAction = this.actions[this.actions.length - 1];
     } else {
@@ -116,6 +117,15 @@ export default class StoreCreate {
     this.notes = state.notes.map(note => new Notes(note));
     this.notes.forEach(note => note.firstSelectedAction());
     this.selectedNote = this.notes[0] || null;
+  }
+
+  get getActionId() {
+    if(this.edit) {
+      return this.selectedAction?.id
+    } else if(this.newScreen) {
+      return uniqueId();
+    }
+    return null;
   }
 
   setDataTitle(title) {
@@ -266,15 +276,6 @@ export default class StoreCreate {
   async saveNotes(docId, notes, batch) {
     let order = 0;
     for (const note of notes) {
-      const spanClass = new RegExp('<span class="action-item">', 'gi');
-      const span = new RegExp('</span>', 'gi');
-      note.content = note.content.replace(spanClass, '');
-      note.content = note.content.replace(span, '');
-      note.actions.forEach(({ title, id }) => {
-        const reg = new RegExp(`"${title}"`, 'gi');
-        note.content = note.content.replace(reg, `<span class='action-item' data-key="${id}">${title}</span>`);
-      });
-
       const id = uniqueId();
       const noteRef = doc(db, `note_sets/${docId}/notes`, id);
 
@@ -296,10 +297,11 @@ export default class StoreCreate {
       const refAction = doc(db, `note_sets/${docId}/notes/${noteId}/actions`, action.id);
       batch.set(refAction, {
         order,
+        id: action.id,
+        colors: action.colors,
         camera: action.camera,
         labels: action.labels,
         title: action.title,
-        id: action.id,
         objectsSelected: action.objectsSelected,
         objectsShown: action.objectsShown,
       });

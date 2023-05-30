@@ -75,11 +75,18 @@
 
 .form-group.active > span,
 .form-group:focus-within > span {
-  color: #ffffff;
-  background: #42A4CB;
+  color: #42A4CB;
+  background: #E4EDF5;
   border-color: #42A4CB;
-  opacity: 0.9;
+  opacity: 1;
 }
 .form-group span.error {
   background-color: #fb3b1e;
+}
+
+.first-block .form-group span.error{
+  color: #42A4CB;
+  background: #E4EDF5;
+  border-color: #42A4CB;
+  opacity: 1;
 }

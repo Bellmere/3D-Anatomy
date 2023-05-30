@@ -8,24 +8,34 @@ export default class HumanApi {
     this.prevSelectedAction = null;
     Object.assign(this, HumanUpdateScreenMixin);
     makeAutoObservable(this);
+
   }
 
   init() {
     this.human = new window.HumanAPI('myWidget');
   }
-
+  get api () {
+    return this.human;
+  }
   updateNote(note, current = 0) {
+    this.setPrevAction();
     this.currentAction = current;
     this.note = note;
+
   }
 
   reset() {
+    this.setPrevAction();
     this.currentAction = 0;
     this.updateCamera();
   }
 
+  setPrevAction() {
+    this.prevSelectedAction =  this.listActions[this.currentAction] || {};
+  }
   setIndexActiveAction(index) {
     if(index >= 0 && index < this.listActions.length) {
+      this.setPrevAction();
       this.currentAction = index;
       this.updateCamera();
     }
@@ -36,10 +46,7 @@ export default class HumanApi {
   updateCamera() {
     const action = this.listActions[this.currentAction];
     if(action === undefined || action === this.prevSelectedAction) return;
-    console.log(action)
-
-    this.prevSelectedAction = action;
-    this._updateCamera(this.human, action);
+    this._updateCamera(this.human, action, this.prevSelectedAction);
   }
 
 
@@ -48,6 +55,7 @@ export default class HumanApi {
     const findIndex = this.listActions.findIndex(item => item.id === id);
 
     if(findIndex !== -1) {
+      this.setPrevAction();
       this.currentAction = findIndex;
       this.updateCamera();
     }
@@ -58,6 +66,7 @@ export default class HumanApi {
     if (this.currentAction + 1 >= this.listActions.length) {
       return;
     }
+    this.setPrevAction();
     this.currentAction = this.currentAction + 1;
 
     this.updateCamera();
@@ -68,6 +77,7 @@ export default class HumanApi {
     if (this.currentAction - 1 < 0) {
       return;
     }
+    this.setPrevAction();
     this.currentAction = this.currentAction - 1;
     this.updateCamera();
   }

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import Switch from '../../fields/switch';
 import AddAction from '../../modal/add-action';
 
-export default observer(function ControllerIframe({ human, onModeCreated, onChange, children }) {
+export default observer(function AddNewAnnotation({ human, onModeCreated, onChange, children }) {
   const modal = useRef(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default observer(function ControllerIframe({ human, onModeCreated, onChan
             objectId: pick.objectId,
             title: data.title,
             description: data.description,
-            theme: 'annotation',
+            theme: 'studioNext',
             position: [
               pick.position.x,
               pick.position.y,

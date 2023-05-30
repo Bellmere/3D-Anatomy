@@ -10,6 +10,7 @@ export default class Action {
                 objectsShown = {},
                 order = 0,
                 title = '',
+                colors = {},
               }) {
     this.camera = camera;
     this.labels = labels;
@@ -18,8 +19,10 @@ export default class Action {
     this.objectsShown = objectsShown;
     this.order = order;
     this.id = id === null ? uniqueId() : id;
+    this.colors = colors;
     makeAutoObservable(this);
   }
+
   get isValid() {
     return this.title?.length > 2;
   }
@@ -27,6 +30,7 @@ export default class Action {
   getLabel(labelId) {
     return this.labels.find(item => labelId === item.id);
   }
+
   update(options) {
     Object.assign(this, options);
   }

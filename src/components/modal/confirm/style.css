@@ -22,7 +22,7 @@
   background-color: #ffffff;
   border-radius: 10px;
   position: relative;
-  font-family: "Roboto";
+  font-family: "Quicksand";
   font-weight: bold;
 }
 .confirm_modal .confirm_modal__content {
@@ -48,7 +48,7 @@
   outline: none;
   width: 50%;
   border: none;
-  font-family: "Roboto";
+  font-family: "Quicksand";
   font-weight: bold;
   font-size: 18px;
   transition: 0.4s;
@@ -72,4 +72,9 @@
 .confirm_modal .confirm_modal__footer button:disabled {
   background-color: #d3d3d3;
   pointer-events: none;
+}
+@media (max-width: 1199px) {
+  .confirm_modal .confirm_modal__main {
+    margin: 15px;
+  }
 }

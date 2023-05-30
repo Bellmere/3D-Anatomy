@@ -25,9 +25,31 @@
 }
 .add-model-page__aside-title {
   font-size: 44px;
+  padding: 0 15px;
 }
 .add-model-page__switch {
   margin: 20px 0;
   display: flex;
   align-items: center;
+}
+@media(max-width: 767px) {
+  .add-model-page__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-model-page__aside {
+    width: 100%;
+    height: 100%;
+  }
+  .add-model-page__aside-title {
+    font-size: 30px;
+    text-align: center;
+  }
+  .add-model-page__title {
+    font-size: 20px;
+  }
+  .add-model-page__switch {
+    justify-content: space-between;
+  }
 }

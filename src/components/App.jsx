@@ -9,7 +9,6 @@ import ROUTES from 'constans/routes';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import SideBar from './sidebar';
 
-
 import HomePage from '../pages/Home';
 import RegisterPage from '../pages/Register';
 import SingInPage from '../pages/SingIn';
@@ -18,8 +17,6 @@ import AllNotesPage from '../pages/AllNotes';
 import ViewerPage from '../pages/Viewer';
 import CreatePage from '../pages/Create';
 import EditPage from '../pages/EditPage';
-import AddModelPage from '../pages/AddModelPage';
-
 
 export const App = observer(() => {
   const { authUser } = useContext(StoreContext);
@@ -28,7 +25,8 @@ export const App = observer(() => {
     <>
       <HelmetProvider>
         <Helmet>
-          <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>
+          {/* <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>*/}
+          <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
           <script src='https://developer.biodigital.com/builds/api/2/human-api.min.js'></script>
           <title>Anatomy App</title>
         </Helmet>
@@ -89,15 +87,6 @@ export const App = observer(() => {
                 />
               }
             />
-            <Route
-              path={ROUTES.ADD_MODEL.path}
-              element={
-                <PrivateRoute
-                  component={<AddModelPage />}
-                  redirectTo={ROUTES.SINGIN.path}
-                  guard={ROUTES.ADD_MODEL}
-                />
-              }
             />
             <Route
               path={ROUTES.CREATE_MODEL.path}

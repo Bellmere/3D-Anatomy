@@ -21,7 +21,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #E9E9E9;
+  background-color: #ACABAC;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -39,7 +39,7 @@
 }
 
 .switch_input:checked + .slider {
-  background-color: rgba(100, 203, 141, 0.19);
+  background-color: #42A4CB;
 }
 
 .switch_input:focus + .slider {
@@ -50,10 +50,11 @@
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-  background-color: #64CB8D;
+  background-color: #9FE494;
+  opacity: 1;
 }
 .switch_input + .slider:before {
-  background-color: #B8B8B8;
+  background-color: #706F71;
 }
 /* Rounded sliders */
 .slider.round {
