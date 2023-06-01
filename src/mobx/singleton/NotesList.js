@@ -33,6 +33,10 @@ export default class NotesList {
     this.textSearch = '';
   }
 
+  removeNoteById(id) {
+    this.list = this.list.filter(item => item.id !== id);
+  }
+
   getQuery(id) {
     if (typeof id === 'string') {
       return query(this.collection, where('region', '==', id.toUpperCase()), orderBy('last_modified', 'desc'));

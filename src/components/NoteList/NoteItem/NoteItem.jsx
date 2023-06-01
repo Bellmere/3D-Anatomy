@@ -1,5 +1,3 @@
-import { doc, deleteDoc } from "firebase/firestore";
-import { db } from '../../../api/firebase/firebase';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EDIT_MODEL } from '../../../constans/routes/routes';
@@ -9,10 +7,11 @@ import { ReactComponent as SquareArrowIcon } from '../../../icons/square-arrow.s
 import ModalConfirm from '../../modal/confirm';
 import './style.css';
 
-export const NoteItem = ({ note }) => {
+export const NoteItem = ({ note, deleteNoteById }) => {
   const [isOpenedModalConfirm, setOpenedModalConfirm] = useState(false);
-  const deleteNote = async () => {
-    await deleteDoc(doc(db, "note_sets", note.id));
+  const deleteNote = () => {
+    deleteNoteById(note.id);
+    setOpenedModalConfirm(false);
   }
   const cancel = () => setOpenedModalConfirm(state => !state);
   return (
