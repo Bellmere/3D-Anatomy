@@ -71,6 +71,8 @@
 .quill .action-item {
   cursor: pointer;
   color: #3f51b5;
+  font-weight: bold;
+  text-decoration: underline;
 }
 .create_page_editor .ql-snow .ql-picker.ql-expanded .ql-picker-options {
   min-width: 150px;

@@ -1,13 +1,20 @@
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from '../../../api/firebase/firebase';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EDIT_MODEL } from '../../../constans/routes/routes';
 import { ReactComponent as TrashIcon } from '../../../icons/trash.svg';
 import { ReactComponent as PenIcon } from '../../../icons/pen.svg';
 import { ReactComponent as SquareArrowIcon } from '../../../icons/square-arrow.svg';
-
+import ModalConfirm from '../../modal/confirm';
 import './style.css';
 
-export const NoteItem = ({ note, handleDelete }) => {
-
+export const NoteItem = ({ note }) => {
+  const [isOpenedModalConfirm, setOpenedModalConfirm] = useState(false);
+  const deleteNote = async () => {
+    await deleteDoc(doc(db, "note_sets", note.id));
+  }
+  const cancel = () => setOpenedModalConfirm(state => !state);
   return (
     <li className="note__item">
       <div className="note__item--wrap">
@@ -16,10 +23,18 @@ export const NoteItem = ({ note, handleDelete }) => {
           <button
             className="note__btn"
             type="button"
-            onClick={() => handleDelete(note.uid)}
+            onClick={() => setOpenedModalConfirm(state => !state)}
           >
-            <TrashIcon className="note__icon" />
+            <TrashIcon
+              className="note__icon"
+
+            />
           </button>
+          {isOpenedModalConfirm ?
+            <ModalConfirm onClose={cancel} onCancel={cancel} onConfirm={deleteNote}>
+              Are you sure you want to delete "{note.title}" ?
+           </ModalConfirm>
+            : null }
           <Link className="note__link" to={EDIT_MODEL.getPath(note.id)}>
             <PenIcon className="note__icon" />
           </Link>

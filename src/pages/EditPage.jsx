@@ -36,6 +36,6 @@ export default function EditPage() {
 
   if (initState === null || loading) return null;
   return (
-    <Create initState={initState} />
+    <Create initState={initState} showModalTile={false} />
   );
 }

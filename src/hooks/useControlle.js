@@ -25,9 +25,10 @@ export default function useController(store, human) {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
         const id = store.getActionId;
-        store.selectedNote.addNewAnnotation(capture, camera, objectsShown.current, title, id, human.getObjectsIdColor());
-        setEvents({ ...EVENTS });
         human.reset(store.selectedAction);
+        const colors = human.getObjectsIdColor();
+        store.selectedNote.addNewAnnotation(capture, camera, objectsShown.current, title, id, colors);
+        setEvents({ ...EVENTS });
         disablePickColor();
         objectsShown.current = {};
         store.offNewScreen();
@@ -39,9 +40,10 @@ export default function useController(store, human) {
     human.api.send('scene.capture', capture => {
       human.api.send('camera.info', camera => {
         const id = store.getActionId;
-        store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title, id, human.getObjectsIdColor());
-        setEvents({ ...EVENTS });
+        const colors = human.getObjectsIdColor();
         human.reset(store.selectedAction);
+        store.selectedNote.updateAnnotation(capture, camera, objectsShown.current, title, id, colors);
+        setEvents({ ...EVENTS });
         disablePickColor();
         objectsShown.current = {};
         store.offEditMode();
@@ -77,6 +79,7 @@ export default function useController(store, human) {
 
   const editMode = () => {
     store.onEditMode();
+    human.resetSelected();
     human.updateCamera(store.selectedAction)
     setEvents({ ...EVENTS, editAnnotation: true, enablePickColor: events.enablePickColor })
   }

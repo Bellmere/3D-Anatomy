@@ -116,6 +116,11 @@ input:-webkit-autofill {
   cursor: pointer;
   /*transition: background 300ms linear;*/
 }
+.button_delete:disabled {
+  background: #ccc!important;
+  pointer-events: none;
+  opacity: 0.7;
+}
 .button_delete:hover {
   background: #4381e0;
 }

@@ -207,6 +207,11 @@ export default class StoreCreate {
     return this.selectedNote?.selectedAction || {};
   }
 
+
+  get currentActionIndex() {
+    return this.selectedNote.actions.findIndex(action => action === this.selectedAction)
+  }
+
   offMode() {
     this.offNewScreen();
     this.offEditMode();

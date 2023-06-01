@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '../../api/firebase/firebase';
 import Notes from '../notes/Notes';
 
@@ -35,9 +35,9 @@ export default class NotesList {
 
   getQuery(id) {
     if (typeof id === 'string') {
-      return query(this.collection, where('region', '==', id.toUpperCase()));
+      return query(this.collection, where('region', '==', id.toUpperCase()), orderBy('last_modified', 'desc'));
     }
-    return query(this.collection);
+    return query(this.collection, orderBy('last_modified', 'desc'));
   }
 
   * getLearns(id) {

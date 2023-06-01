@@ -11,6 +11,7 @@ import BasketSvg from '../../svg/basket';
 
 export default observer(function NoteController({ store, human }) {
   const [isOpened, setOpened] = useState(false);
+
   const updateCamera = () => {
     if(store.selectedAction instanceof Action) {
       human.updateCamera(store.selectedAction)
@@ -76,7 +77,7 @@ export default observer(function NoteController({ store, human }) {
         </>
       </BaseButton>
 
-      <button className='button_delete' onClick={() => setOpened(state => !state)}> Delete Note <BasketSvg /></button>
+      <button disabled={store.notes.length <= 1} className='button_delete' onClick={() => setOpened(state => !state)}> Delete Note <BasketSvg /></button>
       <BaseButton className="green" handlerClick={saveNotes}>Save</BaseButton>
 
     </div>

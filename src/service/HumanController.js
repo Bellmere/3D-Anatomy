@@ -71,9 +71,9 @@ export default class HumanController {
 
   removeColor() {
     if (this.selectedObjectItem) {
+      delete this.colorObjectsId[this.selectedObjectItem];
       this.resetColor({ [this.selectedObjectItem]: true });
       this.deselectElementColor();
-      delete this.colorObjectsId[this.selectedObjectItem];
     }
   }
 
@@ -157,6 +157,7 @@ export default class HumanController {
     }
   }
   updateCamera(action) {
+    this.colorObjectsId = {};
     this._updateCamera(this.api, action, this.prevSelectedAction);
     this.addSelectedColorObjects(action?.colors)
     this.prevSelectedAction = action;

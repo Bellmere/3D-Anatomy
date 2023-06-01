@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import ControllerIFrame from '../../components/biodigital/events/controller-iframe';
 import NotesModal from '../../components/modal/notes-modal';
@@ -9,7 +9,6 @@ import TopController from './top-controller';
 import NoteController from './note-controller';
 import InputLabel from '../../components/fields/inputLabel';
 import ReactQuill, { Quill } from 'react-quill';
-
 import 'react-quill/dist/quill.snow.css';
 import './style.css';
 
@@ -32,7 +31,7 @@ const formats = [
   'formats/action',
   'action',
 ];
-export default observer(function CreatePage({ initState = null }) {
+export default observer(function CreatePage({ initState = null, showModalTile = true }) {
 
   const [reactQuillRef, setReactQuillRef] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -74,11 +73,29 @@ export default observer(function CreatePage({ initState = null }) {
     reactQuillRef.getEditor().removeFormat(stateRange.index, stateRange.length);
     setStateRange(null);
   }
-  console.log(stateRange);
-  if (!store.data.title || !store.data.region) {
-    return <NotesModal store={store} />;
+
+  const contentRef = useRef();
+  const eventAction = useCallback(({ target }) => {
+    if (target.classList.contains('action-item')) {
+      store.selectedNote.setSelectedAction(target.dataset.key);
+      human.updateCamera(store.selectedAction);
+    }
+  }, [store, human]);
+
+  useEffect(() => {
+    const element = contentRef.current;
+    if (contentRef.current) {
+      element.addEventListener('click', eventAction);
+    }
+    return () => element?.removeEventListener('click', eventAction);
+  }, [eventAction, contentRef.current]);
+
+  if ((!store.data.title || !store.data.region)) {
+    return showModalTile ? <NotesModal store={store} /> : null;
   }
   let content = store.selectedNote?.content;
+
+
   return (
     <div className='container create_page__container'>
       <TopController store={store} human={human}>
@@ -88,7 +105,7 @@ export default observer(function CreatePage({ initState = null }) {
         <IFrameHuman scene={store.selectedNote?.scene || ''} init={init}>
           {human ? <ControllerIFrame human={human} store={store} /> : null}
         </IFrameHuman>
-        <div className='create_page_editor'>
+        <div className='create_page_editor' ref={contentRef}>
           {store.selectedNote ?
             <>
               <InputLabel
