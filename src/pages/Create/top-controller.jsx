@@ -5,6 +5,7 @@ import BasketSvg from '../../svg/basket';
 import ListModels from './list-models';
 import ModalConfirm from '../../components/modal/confirm';
 import GroupButtonPagination from '../../components/buttons/group-button-pagination';
+import Label from '../../components/label/label';
 export default observer(function TopController({ store, human, children }) {
 
   const [isOpened, setOpened] = useState(false);
@@ -31,7 +32,7 @@ export default observer(function TopController({ store, human, children }) {
     store.selectedNote.setSelectedAction(value);
     human.updateCamera(store.selectedAction);
   }
-
+  //console.log(options);
   return (
     <div className='create_page_top_controller'>
       <h2 className='create_page__title'>Create page</h2>
@@ -45,16 +46,18 @@ export default observer(function TopController({ store, human, children }) {
               Are you sure you want to delete this screen?
             </ModalConfirm>
             : null}
-          <div className="wrap-select">
-          <Select
+          <div className="wrap-select min-width-default">
+            <Label options={options} setSelectedAction={setSelectedAction} curentItem={store.selectedAction.id}></Label>
+          {/*<Select
             value={{ value: store.selectedAction.id, label: store.selectedAction.title }}
             options={options}
             onChange={({ value }) => setSelectedAction(value)}
-          ></Select>
+          ></Select>*/}
           </div>
           {store.selectedAction.id ?
             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
               <BasketSvg onClick={() => setOpened(true)} />
+
             </div>
             : null}
           <GroupButtonPagination

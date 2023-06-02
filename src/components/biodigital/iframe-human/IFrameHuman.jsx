@@ -4,6 +4,7 @@ import './style.css';
 
 import { ReactComponent as HideFullScreen } from '../../../icons/full-screen-exit.svg';
 import { ReactComponent as OpenFullScreen } from '../../../icons/full-screen-open.svg';
+import { ReactComponent as LogoIcon } from '../../../icons/logo.svg';
 
 const paramsIframe = [
   'ui-all=false',
@@ -19,6 +20,7 @@ export default function IFrameHuman({
   init = () => {},
   className = '',
   children,
+  pickStatus
 }) {
   const handle = useFullScreenHandle();
   const idModel = scene?.length > 10 ? `m=${scene}.json` : `be=${scene}`;
@@ -40,9 +42,15 @@ export default function IFrameHuman({
   return (
     <FullScreen handle={handle}>
       <div style={{ position: 'relative', height: '100%', width: '100%' ,  overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', right: '20px', top: '20px' , overflow: 'auto' , bottom: '15px' }}>
+        <div className={(pickStatus ? 'wrap-screen-false' : 'wrap-screen')}  style={{ position: 'absolute', right: '15px', top: '15px' , overflow: 'auto' , bottom: '15px' , zIndex: '1' }}>
           {handle?.active ? null : children}
         </div>
+        {handle.active ?
+          <div className="logo-client">
+            <LogoIcon className='logo__icon'/>
+          </div>
+          : ''
+        }
         <button
           className={
             handle.active

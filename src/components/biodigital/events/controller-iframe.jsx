@@ -9,7 +9,7 @@ import Switch from '../../fields/switch';
 import { SketchPicker } from 'react-color';
 
 
-export default observer(function ControllerIFrame({ store, human }) {
+export default observer(function ControllerIFrame({ store, human , pickStatus }) {
   const {
     events,
     saveScreen,
@@ -28,6 +28,13 @@ export default observer(function ControllerIFrame({ store, human }) {
 
   const [colors, setColors] = useState({ rgb: { r: 61, g: 55, b: 92, a: 1 } });
   const [selectElement, setSelectElement] = useState(null);
+
+  useEffect(() => {
+    pickStatus(events.enablePickColor);
+  },[events.enablePickColor])
+
+
+
 
   useEffect(() => {
     disablePickColor();
@@ -55,6 +62,9 @@ export default observer(function ControllerIFrame({ store, human }) {
     if (events.enablePickColor) disablePickColor();
     else enablePickColor();
   };
+
+
+
   return (
     <div className='create_page_controller'>
       {store.isEditScreen ?
@@ -117,6 +127,7 @@ export default observer(function ControllerIFrame({ store, human }) {
               store={store} />
             <Switch
               onSwitch={togglePickColor}
+
             >
               <div style={{ display: 'flex', gap: '10px' }}>
                 Pick color object selected

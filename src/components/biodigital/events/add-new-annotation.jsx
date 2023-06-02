@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import Switch from '../../fields/switch';
 import AddAction from '../../modal/add-action';
 
+
 export default observer(function AddNewAnnotation({ human, onModeCreated, onChange, children }) {
   const modal = useRef(null);
 
@@ -31,7 +32,6 @@ export default observer(function AddNewAnnotation({ human, onModeCreated, onChan
 
     return () => human.unsubscribe(picked, 'scenePicked');
   }, [onModeCreated, human]);
-
 
   return (
     <>

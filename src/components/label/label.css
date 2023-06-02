@@ -1,0 +1,95 @@
+.select-wrap {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12);
+  position: absolute;
+  top: 45px;
+  min-width: 350px;
+  width: 350px;
+  background: #fff;
+  z-index: 10;
+  max-height: 80vh;
+  overflow: auto;
+  border-radius: 5px;
+}
+.wrap-select .label-header {
+  position: relative;
+}
+.wrap-select.min-width-default {
+  min-width: auto;
+}
+.wrap-select button {
+  color: #353535;
+  background: #fff;
+  padding: 6px 16px;
+  font-size: 14px;
+  min-width: 64px;
+  box-sizing: border-box;
+  font-weight: 500;
+  line-height: 1.75;
+  border: 1px solid #D7D7D7;
+  width: 100%;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.select-wrap .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    min-height: 42px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: nowrap;
+    letter-spacing: 0.00938em;
+    padding: 0 15px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.select-wrap .item:hover,
+.select-wrap .item.active {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.select-wrap .item span {
+  margin-right: 50px;
+  color: #000;
+}
+.select-wrap .item svg {
+  max-width: 28px;
+  transition: .3s;
+  border-radius: 50%;
+  padding: 2px;
+}
+@media(max-width: 767px) {
+  .wrap-select.min-width-default,
+  .wrap-select .label-header{
+    position: static;
+  }
+  .select-wrap {
+    width: calc(100% - 30px);
+    left: 15px;
+    top: 190px;
+    max-height: 55vh;
+  }
+
+}
+
+@media(max-width: 480px) {
+  .wrap-select.min-width-default,
+  .wrap-select .label-header{
+    position: relative;
+  }
+  .select-wrap {
+    width: 100%;
+    min-width: calc(100% + 25px);
+    left:0;
+    top: 45px;
+  }
+}
+
+/*.select-wrap .item svg:hover {
+  background: #CDCDCD;
+}*/
+

@@ -145,6 +145,12 @@ input:-webkit-autofill {
 .ql-editor {
   max-height: calc(100vh - 350px);
 }
+.logo-client {
+  position: absolute;
+  right: 82px;
+  bottom: 17px;
+  max-width: 100px;
+}
 @media (max-width: 767px) {
   .container-iframe {
     display: flex;

@@ -37,6 +37,7 @@ export default observer(function CreatePage({ initState = null, showModalTile = 
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [stateRange, setStateRange] = useState(null);
   const [store] = useState(new StoreCreate());
+  const [pickStatus, setPickStatus] = useState(false);
   const [human, setHumanApi] = useState(null);
   const init = () => {
     setHumanApi(new HumanController('myWidget'));
@@ -96,14 +97,15 @@ export default observer(function CreatePage({ initState = null, showModalTile = 
   let content = store.selectedNote?.content;
 
 
+
   return (
     <div className='container create_page__container'>
       <TopController store={store} human={human}>
         <NoteController store={store} human={human} />
       </TopController>
       <div className='create_page__content'>
-        <IFrameHuman scene={store.selectedNote?.scene || ''} init={init}>
-          {human ? <ControllerIFrame human={human} store={store} /> : null}
+        <IFrameHuman scene={store.selectedNote?.scene || ''} init={init} pickStatus={pickStatus}>
+          {human ? <ControllerIFrame human={human} store={store} pickStatus={setPickStatus} /> : null}
         </IFrameHuman>
         <div className='create_page_editor' ref={contentRef}>
           {store.selectedNote ?

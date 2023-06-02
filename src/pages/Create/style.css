@@ -87,7 +87,27 @@
     border-color: #42A4CB;
     opacity: 1;
 }
+
+
+@media(min-width: 1920px) {
+  .create_page__content .fullscreen .wrap-screen-false {
+    bottom: 210px !important;
+  }
+}
+@media(min-width: 1401px) {
+  .create_page__content .fullscreen .wrap-screen {
+    bottom: 210px !important;
+  }
+}
+@media(max-width: 1400px) {
+  .create_page__content .fullscreen .wrap-screen{
+    bottom: 15px !important;
+  }
+}
 @media (max-width: 1199px) {
+  .create_page__content .fullscreen .wrap-screen-false {
+    bottom: 15px !important;
+  }
   .create_page_top_controller {
       flex-wrap: wrap;
   }
